@@ -4,6 +4,12 @@
 # Allow main.tf in all subdirectories
 !modules/**/main.tf
 
+# Ignore the root variables.tf
+/variables.tf
+
+# Allow variables.tf in all subdirectories
+!modules/**/variables.tf
+
 # Ignore Local .terraform directories
 **/.terraform/*
 
