@@ -1,4 +1,10 @@
-# Local .terraform directories
+# Ignore the root main.tf
+/main.tf
+
+# Allow main.tf in all subdirectories
+!modules/**/main.tf
+
+# Ignore Local .terraform directories
 **/.terraform/*
 
 # Ignore Terraform state files, which can contain sensitive information
@@ -29,6 +35,3 @@ terraform.rc
 
 # Ignore files used for Terraform lock and dependency management
 .terraform.lock.hcl
-
-!/main.tf
-!/main.tf
