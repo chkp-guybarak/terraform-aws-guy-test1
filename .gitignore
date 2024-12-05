@@ -1,5 +1,34 @@
-.terraform/
-.terraform.lock.hcl
-terraform.tfstate
-terraform.tfstate.backup
+# Local .terraform directories
+**/.terraform/*
 
+# Ignore Terraform state files, which can contain sensitive information
+terraform.tfstate
+terraform.tfstate.*
+
+# Ignore crash logs
+crash.log
+
+# Ignore plan files
+*.tfplan
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore backup files created by Terraform
+*.tfstate.backup
+
+# Ignore files for sensitive variable definitions
+*.auto.tfvars
+*.auto.tfvars.json
+*.tfvars
+*.tfvars.json
+
+# Ignore logs
+*.log
+
+# Ignore files used for Terraform lock and dependency management
+.terraform.lock.hcl
+
+main.tf
+variables.tf
