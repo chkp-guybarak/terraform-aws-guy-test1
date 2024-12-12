@@ -15,7 +15,7 @@ See the [Check Point CloudGuard Auto Scaling on AWS](https://aws.amazon.com/quic
 
 This solution uses the following modules:
 - /terraform/aws/autoscale
-- /terraform/aws/modules/custom-autoscale
+- /terraform/aws/custom-autoscale
 - /terraform/aws/management
 - /terraform/aws/cme-iam-role
 

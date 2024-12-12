@@ -12,7 +12,7 @@ These types of Terraform resources are supported:
 See the [Security Management Server with CloudGuard for AWS](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk130372) for additional information
 
 This solution uses the following modules:
-- /terraform/aws/modules/amis
+- /terraform/aws/amis
 - /terraform/aws/cme-iam-role
 
 ## Configurations

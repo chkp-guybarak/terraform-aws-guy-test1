@@ -18,7 +18,7 @@ resource "aws_security_group" "external_alb_security_group" {
 }
 
 module "external_load_balancer" {
-  source = "../modules/common/load_balancer"
+  source = "../common/load_balancer"
 
   load_balancers_type = var.load_balancers_type
   instances_subnets = var.gateways_subnets
@@ -121,7 +121,7 @@ resource "aws_security_group" "internal_security_group" {
 
 module "internal_load_balancer" {
   count = local.deploy_servers_condition ? 1 : 0
-  source = "../modules/common/load_balancer"
+  source = "../common/load_balancer"
 
   load_balancers_type = var.load_balancers_type
   instances_subnets = var.servers_subnets
@@ -141,7 +141,7 @@ module "internal_load_balancer" {
 
 module "custom_autoscale" {
   count = local.deploy_servers_condition ? 1 : 0
-  source = "../modules/custom-autoscale"
+  source = "../custom-autoscale"
 
   prefix = var.prefix
   asg_name = var.asg_name

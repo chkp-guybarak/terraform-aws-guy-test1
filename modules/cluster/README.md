@@ -13,8 +13,8 @@ These types of Terraform resources are supported:
 See the [Deploying a Check Point Cluster in AWS (Amazon Web Services)](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk104418) for additional information
 
 This solution uses the following modules:
-- /terraform/aws/modules/amis
-- /terraform/aws/modules/cluster-iam-role
+- /terraform/aws/amis
+- /terraform/aws/cluster-iam-role
 
 
 ## Configurations

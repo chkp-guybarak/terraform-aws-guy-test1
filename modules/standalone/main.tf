@@ -1,12 +1,12 @@
 module "amis" {
-  source = "../modules/amis"
+  source = "../amis"
 
   version_license = var.standalone_version
   chkp_type = "standalone"
 }
 
 module "common_permissive_sg" {
-  source = "../modules/common/permissive_sg"
+  source = "../common/permissive_sg"
 
   vpc_id = var.vpc_id
   resources_tag_name = var.resources_tag_name
@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "standalone_role_assume_policy_document" {
 }
 
 module "attach_cloudwatch_policy" {
-  source = "../modules/cloudwatch-policy"
+  source = "../cloudwatch-policy"
   count = local.enable_cloudwatch_policy
   role = aws_iam_role.standalone_iam_role[count.index].name
   tag_name = var.resources_tag_name != "" ? var.resources_tag_name : var.standalone_name
@@ -61,7 +61,7 @@ resource "aws_network_interface" "private_eni" {
 }
 
 module "common_eip" {
-  source = "../modules/common/elastic_ip"
+  source = "../common/elastic_ip"
 
   allocate_and_associate_eip = var.allocate_and_associate_eip
   external_eni_id = aws_network_interface.public_eni.id
@@ -69,7 +69,7 @@ module "common_eip" {
 }
 
 module "common_internal_default_route" {
-  source = "../modules/common/internal_default_route"
+  source = "../common/internal_default_route"
 
   private_route_table = var.private_route_table
   internal_eni_id = aws_network_interface.private_eni.id

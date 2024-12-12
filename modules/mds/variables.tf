@@ -21,7 +21,7 @@ variable "mds_instance_type" {
   default = "m5.2xlarge"
 }
 module "validate_instance_type" {
-  source = "../modules/common/instance_type"
+  source = "../common/instance_type"
 
   chkp_type = "mds"
   instance_type = var.mds_instance_type
@@ -89,7 +89,7 @@ variable "mds_version" {
   default = "R81.20-BYOL"
 }
 module "validate_mds_version" {
-  source = "../modules/common/version_license"
+  source = "../common/version_license"
 
   chkp_type = "mds"
   version_license = var.mds_version

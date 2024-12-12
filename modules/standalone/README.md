@@ -11,7 +11,7 @@ These types of Terraform resources are supported:
 
 
 This solution uses the following modules:
-- /terraform/aws/modules/amis
+- /terraform/aws/amis
 
 ## Configurations
 

@@ -12,8 +12,8 @@ These types of Terraform resources are supported:
 
 This solution uses the following modules:
 - /terraform/aws/standalone
-- /terraform/aws/modules/amis
-- /terraform/aws/modules/vpc
+- /terraform/aws/amis
+- /terraform/aws/vpc
 
 ## Configurations
 

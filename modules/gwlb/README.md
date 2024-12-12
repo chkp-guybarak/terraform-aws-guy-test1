@@ -17,7 +17,7 @@ This solution uses the following modules:
 - /terraform/aws/autoscale-gwlb
 - /terraform/aws/management
 - /terraform/aws/cme-iam-role-gwlb
-- /terraform/aws/modules/amis
+- /terraform/aws/amis
 ## Configurations
 
 The **main.tf** file includes the following provider configuration block used to configure the credentials for the authentication with AWS, as well as a default region for your resources:

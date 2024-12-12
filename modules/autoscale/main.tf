@@ -1,5 +1,5 @@
 module "amis" {
-  source = "../modules/amis"
+  source = "../amis"
 
   version_license = var.gateway_version
 }
@@ -125,7 +125,7 @@ resource "aws_iam_role" "role" {
   path = "/"
 }
 module "attach_cloudwatch_policy" {
-  source = "../modules/cloudwatch-policy"
+  source = "../cloudwatch-policy"
   count = local.create_iam_role
   role = aws_iam_role.role[count.index].name
   tag_name = local.asg_name

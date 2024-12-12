@@ -13,7 +13,7 @@ These types of Terraform resources are supported:
 Learn more about [TAP Lambda](#TAP-Lambda) and [TAP Termination Lambda](#TAP-Termination-Lambda)
 
 This solution uses the following modules:
-- /terraform/aws/modules/amis
+- /terraform/aws/amis
 
 
 ## Prerequisites
@@ -100,7 +100,7 @@ provider "aws" {
 }
 
 module "tap" {
-  source = "../../modules/tap"
+  source = "../../tap"
 
   // --- VPC Network Configuration ---
   vpc_id = var.vpc_id
@@ -146,7 +146,7 @@ Now point your browser at [now.checkpoint.com](https://now.checkpoint.com). You 
 Go to the Management > Sentries tab and click 'New'
 * The New Sentry pane will open – select 'Virtual’, enter an optional description, verify the time zone, and click ADD
 * A new sentry entry will appear. It will be uniquely identified by automatically generated 'Name’ and 'MAC Address’
-* Download the CloudGuard Network TAP Terraform module from [CloudGuard Network Github - TAP module](https://github.com/CheckPointSW/CloudGuardIaaS/tree/master/terraform/aws/modules/tap).
+* Download the CloudGuard Network TAP Terraform module from [CloudGuard Network Github - TAP module](https://github.com/CheckPointSW/CloudGuardIaaS/tree/master/terraform/aws/tap).
 Edit terraform.tfvars file according to the instructions in the [Usage](#Usage) section above, using the sentry’s 'MAC Address’ for the registration_key variable.
 * Launch the module using Terraform. As described above, this module creates a Check Point TAP Gateway instance in the VPC specified by the user, along with traffic mirror filter and target, and two lambda functions: 'TAP Lambda' and 'TAP Termination Lambda'. Once the Check Point CloudGuard Network TAP Gateway instance is deployed, the TAP Lambda is invoked and scans the entire VPC for mirrorable NITRO instances that meet the configured selection criteria.
 * After up to 20 minutes, the sentry state will change to “Connected” in the NOW portal.

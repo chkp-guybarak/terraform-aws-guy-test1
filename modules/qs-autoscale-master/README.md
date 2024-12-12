@@ -21,7 +21,7 @@ This solution uses the following modules:
 - /terraform/aws/autoscale
 - /terraform/aws/management
 - /terraform/aws/cme-iam-role
-- /terraform/aws/modules/vpc
+- /terraform/aws/vpc
 
 ## Configurations
 

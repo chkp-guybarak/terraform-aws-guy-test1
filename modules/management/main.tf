@@ -1,6 +1,6 @@
 
 module "amis" {
-  source = "../modules/amis"
+  source = "../amis"
 
   version_license = var.management_version
   chkp_type = "management"

@@ -11,7 +11,7 @@ These types of Terraform resources are supported:
 See the [Multi-Domain Management Deployment on AWS](https://supportcenter.us.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk143213) for additional information
 
 This solution uses the following modules:
-- /terraform/aws/modules/amis
+- /terraform/aws/amis
 - /terraform/aws/cme-iam-role
 
 ## Configurations

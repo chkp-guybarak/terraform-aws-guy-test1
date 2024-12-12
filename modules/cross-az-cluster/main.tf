@@ -1,14 +1,14 @@
 
 
 module "amis" {
-  source = "../modules/amis"
+  source = "../amis"
 
   version_license = var.gateway_version
   chkp_type = "gateway"
 }
 
 module "common_permissive_sg" {
-  source = "../modules/common/permissive_sg"
+  source = "../common/permissive_sg"
 
   vpc_id = var.vpc_id
   resources_tag_name = var.resources_tag_name
@@ -21,12 +21,12 @@ resource "aws_iam_instance_profile" "cluster_instance_profile" {
 }
 
 module "cluster_iam_role" {
-  source = "../modules/cluster-iam-role"
+  source = "../cluster-iam-role"
   count = local.create_iam_role
 }
 
 module "attach_cloudwatch_policy" {
-  source = "../modules/cloudwatch-policy"
+  source = "../cloudwatch-policy"
   count = local.enable_cloudwatch_policy
   role = aws_iam_instance_profile.cluster_instance_profile.role
   tag_name = var.resources_tag_name != "" ? var.resources_tag_name : var.gateway_name

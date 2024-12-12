@@ -18,7 +18,7 @@ This solution uses the following modules:
 - /terraform/aws/autoscale-gwlb
 - /terraform/aws/management
 - /terraform/aws/cme-iam-role-gwlb
-- /terraform/aws/modules/amis
+- /terraform/aws/amis
 - /terraform/aws/gwlb
 ## Configurations
 

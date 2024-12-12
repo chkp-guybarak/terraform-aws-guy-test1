@@ -5,16 +5,69 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fccd76e9-3362-4a25-a718-545ef4ddbf0a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/minimal_subnet/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/minimal_subnet/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/minimal_subnet/outputs.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/minimal_subnet/variables.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/minimal_vpc/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/minimal_vpc/main.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/minimal_vpc/outputs.tf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/minimal_vpc/variables.tf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/autoscale-gwlb/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale-gwlb/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/autoscale-gwlb/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale-gwlb/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/autoscale-gwlb/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale-gwlb/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/autoscale/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/autoscale/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/autoscale/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cluster-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cluster-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cluster-master/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cluster-master/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cluster-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cluster-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cluster/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cluster/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cluster/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cluster/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cluster/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cluster/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cross-az-cluster-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cross-az-cluster-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cross-az-cluster-master/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cross-az-cluster-master/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cross-az-cluster-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cross-az-cluster-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cross-az-cluster/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cross-az-cluster/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cross-az-cluster/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cross-az-cluster/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cross-az-cluster/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cross-az-cluster/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gateway-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gateway-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gateway-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gateway-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gateway/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gateway/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gateway/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gateway/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gwlb-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gwlb-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gwlb-master/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gwlb-master/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gwlb-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gwlb-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gwlb/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gwlb/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gwlb/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gwlb/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gwlb/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gwlb/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/management/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/management/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/management/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/management/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/management/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/management/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/mds/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/mds/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/mds/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/mds/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/mds/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/mds/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/qs-autoscale-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/qs-autoscale-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/qs-autoscale-master/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/qs-autoscale-master/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/qs-autoscale-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/qs-autoscale-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/qs-autoscale/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/qs-autoscale/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/qs-autoscale/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/qs-autoscale/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/qs-autoscale/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/qs-autoscale/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/standalone-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/standalone-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/standalone-master/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/standalone-master/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/standalone-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/standalone-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/standalone/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/standalone/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/standalone/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/standalone/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/standalone/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/standalone/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tap/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tap/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tap/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tap/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tap/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tap/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-asg-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-asg-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-asg-master/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-asg-master/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-asg-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-asg-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-asg/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-asg/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-cross-az-cluster-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-cross-az-cluster-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-cross-az-cluster-master/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-cross-az-cluster-master/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-cross-az-cluster-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-cross-az-cluster-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-cross-az-cluster/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-cross-az-cluster/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-cross-az-cluster/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-cross-az-cluster/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-gwlb-master/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-gwlb-master/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-gwlb-master/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-gwlb-master/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-gwlb-master/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-gwlb-master/variables.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-gwlb/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-gwlb/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tgw-gwlb/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tgw-gwlb/variables.tf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,27 +77,27 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2pnfaBmZbqetJ3XU74qlT3GjW4g" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "Z:/Source/terraform-aws-guy-test1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;Z:/Source/terraform-aws-guy-test1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="Z:\Source\terraform-aws-guy-test1\modules" />
@@ -67,6 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733406821689</updated>
       <workItem from="1733406822751" duration="11595000" />
+      <workItem from="1734004175283" duration="602000" />
     </task>
     <servers />
   </component>

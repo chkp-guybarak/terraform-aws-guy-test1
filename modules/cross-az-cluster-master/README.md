@@ -15,9 +15,9 @@ See the [Deploying a Check Point Cluster in AWS (Amazon Web Services)](https://s
 
 This solution uses the following modules:
 - /terraform/aws/cross-az-cluster
-- /terraform/aws/modules/amis
-- /terraform/aws/modules/vpc
-- /terraform/aws/modules/cluster-iam-role
+- /terraform/aws/amis
+- /terraform/aws/vpc
+- /terraform/aws/cluster-iam-role
 
 
 ## Configurations

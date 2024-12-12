@@ -15,8 +15,8 @@ See the [Automatically Provision a CloudGuard Security Gateway in AWS](https://s
 
 This solution uses the following modules:
 - /terraform/aws/gateway
-- /terraform/aws/modules/amis
-- /terraform/aws/modules/vpc
+- /terraform/aws/amis
+- /terraform/aws/vpc
 
 ## Configurations
 

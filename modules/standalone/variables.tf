@@ -30,7 +30,7 @@ variable "standalone_instance_type" {
   default = "c5.xlarge"
 }
 module "validate_instance_type" {
-  source = "../modules/common/instance_type"
+  source = "../common/instance_type"
 
   chkp_type = "standalone"
   instance_type = var.standalone_instance_type
@@ -86,7 +86,7 @@ variable "standalone_version" {
   default = "R81.20-BYOL"
 }
 module "validate_standalone_version" {
-  source = "../modules/common/version_license"
+  source = "../common/version_license"
 
   chkp_type = "standalone"
   version_license = var.standalone_version
