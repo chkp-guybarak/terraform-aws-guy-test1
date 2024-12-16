@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "eu-north-1"
+  # Optionally, you can also define credentials here or through environment variables
+}
 // --- VPC ---
 module "launch_vpc" {
   source = "../vpc"

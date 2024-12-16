@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fccd76e9-3362-4a25-a718-545ef4ddbf0a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/autoscale-gwlb/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale-gwlb/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/autoscale-gwlb/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale-gwlb/main.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/autoscale-gwlb/variables.tf" beforeDir="false" afterPath="$PROJECT_DIR$/modules/autoscale-gwlb/variables.tf" afterDir="false" />
@@ -85,19 +86,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;Z:/Source/terraform-aws-guy-test1&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "Z:/Source/CloudGuardIaaS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="Z:\Source\terraform-aws-guy-test1\modules" />
@@ -120,7 +121,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733406821689</updated>
       <workItem from="1733406822751" duration="11595000" />
-      <workItem from="1734004175283" duration="602000" />
+      <workItem from="1734004175283" duration="1395000" />
     </task>
     <servers />
   </component>
