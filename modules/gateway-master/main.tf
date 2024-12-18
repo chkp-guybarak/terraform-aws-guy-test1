@@ -1,7 +1,4 @@
-provider "aws" {
-  region = "eu-north-1"
-  # Optionally, you can also define credentials here or through environment variables
-}
+
 // --- VPC ---
 module "launch_vpc" {
   source = "../vpc"
@@ -27,10 +24,6 @@ resource "aws_route_table_association" "private_rtb_to_private_subnets" {
 
 module "launch_gateway_into_vpc" {
   source = "../gateway"
-  providers = {
-    aws = aws
-  }
-
   vpc_id = module.launch_vpc.vpc_id
   public_subnet_id = module.launch_vpc.public_subnets_ids_list[0]
   private_subnet_id = module.launch_vpc.private_subnets_ids_list[0]
