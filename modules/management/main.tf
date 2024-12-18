@@ -195,9 +195,6 @@ resource "aws_instance" "management-instance" {
 
 module "cme_iam_role" {
   source = "../cme-iam-role"
-  providers = {
-    aws = aws
-  }
   count = local.new_instance_profile_general
 
   sts_roles = var.sts_roles
@@ -206,9 +203,6 @@ module "cme_iam_role" {
 
 module "cme_iam_role_gwlb" {
   source = "../cme-iam-role-gwlb"
-  providers = {
-    aws = aws
-  }
   count = local.new_instance_profile_gwlb
 
   sts_roles = var.sts_roles
