@@ -33,47 +33,41 @@ module "attach_cloudwatch_policy" {
 }
 
 resource "aws_network_interface" "member_a_external_eni" {
-  subnet_id = var.public_subnet_id
+  subnet_id = var.public_subnet_ids[0]
   security_groups = [module.common_permissive_sg.permissive_sg_id]
   description = "Member A external"
   source_dest_check = false
-  lifecycle {
-    ignore_changes = [private_ips_count,]
-  }
   private_ips_count = 1
   tags = {
-    Name = format("%s-Member_A_ExternalInterface", var.resources_tag_name != "" ? var.resources_tag_name : var.gateway_name) }
+    x-chkp-interface-type = "external" }
 }
 
 resource "aws_network_interface" "member_b_external_eni" {
-  subnet_id = var.public_subnet_id
+  subnet_id = var.public_subnet_ids[1]
   security_groups = [module.common_permissive_sg.permissive_sg_id]
   description = "Member B external"
   source_dest_check = false
+  private_ips_count = 1
   tags = {
-    Name = format("%s-Member_B_ExternalInterface", var.resources_tag_name != "" ? var.resources_tag_name : var.gateway_name) }
+    x-chkp-interface-type = "external" }
 }
 
 resource "aws_network_interface" "member_a_internal_eni" {
-  subnet_id = var.private_subnet_id
+  subnet_id = var.private_subnet_ids[0]
   security_groups = [module.common_permissive_sg.permissive_sg_id]
   description = "Member A internal"
   source_dest_check = false
-  lifecycle {
-    ignore_changes = [private_ips_count,]
-  }
-  private_ips_count = 1
   tags = {
-    Name = format("%s-Member_A_InternalInterface", var.resources_tag_name != "" ? var.resources_tag_name : var.gateway_name) }
+    x-chkp-interface-type = "internal" }
 }
 
 resource "aws_network_interface" "member_b_internal_eni" {
-  subnet_id = var.private_subnet_id
+  subnet_id = var.private_subnet_ids[1]
   security_groups = [module.common_permissive_sg.permissive_sg_id]
   description = "Member B internal"
   source_dest_check = false
   tags = {
-    Name = format("%s-Member_B_InternalInterface", var.resources_tag_name != "" ? var.resources_tag_name : var.gateway_name) }
+    x-chkp-interface-type = "internal" }
 }
 
 resource "aws_route" "internal_default_route" {
@@ -86,13 +80,22 @@ resource "aws_route" "internal_default_route" {
   network_interface_id = aws_network_interface.member_a_internal_eni.id
 }
 
-resource "aws_route_table_association" "private_rtb_to_private_subnet" {
+resource "aws_route_table_association" "private_rtb_a" {
   count = var.private_route_table == "" ? 0 : 1
   route_table_id = var.private_route_table
-  subnet_id = var.private_subnet_id
+  subnet_id = var.private_subnet_ids[0]
+}
+resource "aws_route_table_association" "private_rtb_b" {
+  count = var.private_route_table == "" ? 0 : 1
+  route_table_id = var.private_route_table
+  subnet_id = var.private_subnet_ids[1]
 }
 
 resource "aws_launch_template" "member_a_launch_template" {
+  depends_on = [
+    aws_network_interface.member_a_external_eni,
+    aws_network_interface.member_a_internal_eni
+  ]
   instance_type = var.gateway_instance_type
   key_name = var.key_name
   image_id = module.amis.ami_id
@@ -117,6 +120,10 @@ resource "aws_launch_template" "member_a_launch_template" {
 }
 
 resource "aws_launch_template" "member_b_launch_template" {
+  depends_on = [
+    aws_network_interface.member_b_external_eni,
+    aws_network_interface.member_b_internal_eni
+  ]
   instance_type = var.gateway_instance_type
   key_name = var.key_name
   image_id = module.amis.ami_id
@@ -142,8 +149,7 @@ resource "aws_launch_template" "member_b_launch_template" {
 
 resource "aws_instance" "member-a-instance" {
   depends_on = [
-    aws_network_interface.member_a_external_eni,
-    aws_network_interface.member_a_internal_eni
+    aws_launch_template.member_a_launch_template
   ]
 
   launch_template {
@@ -156,10 +162,9 @@ resource "aws_instance" "member-a-instance" {
   tags = merge({
     Name = format("%s-Member-A",var.gateway_name),
     x-chkp-member-ips = format("public-ip=%s:external-private-ip=%s:internal-private-ip=%s",
-      var.allocate_and_associate_eip ? aws_eip.member_a_eip[0].public_ip : "", aws_network_interface.member_a_external_eni.private_ip,aws_network_interface.member_a_internal_eni.private_ip),
-    x-chkp-cluster-ips = format("cluster-ip=%s:cluster-eth0-private-ip=%s:cluster-eth1-private-ip=%s",
-      aws_eip.cluster_eip.public_ip, element(tolist(setsubtract(tolist(aws_network_interface.member_a_external_eni.private_ips), [aws_network_interface.member_a_external_eni.private_ip])), 0),
-      element(tolist(setsubtract(tolist(aws_network_interface.member_a_internal_eni.private_ips), [aws_network_interface.member_a_internal_eni.private_ip])), 0))
+      aws_eip.member_a_eip.public_ip, aws_network_interface.member_a_external_eni.private_ip,aws_network_interface.member_a_internal_eni.private_ip),
+    x-chkp-cluster-ips = format("cluster-ip=%s:secondary-external-private-ip=%s",
+      aws_eip.cluster_eip.public_ip, element(tolist(setsubtract(tolist(aws_network_interface.member_a_external_eni.private_ips), [aws_network_interface.member_a_external_eni.private_ip])), 0))
   }, var.instance_tags)
 
   ebs_block_device {
@@ -178,7 +183,7 @@ resource "aws_instance" "member-a-instance" {
     // script's arguments
     Hostname = var.gateway_hostname,
     PasswordHash = local.gateway_password_hash_base64,
-    MaintenanceModePassword = local.maintenance_mode_password_hash_base64,
+    MaintenanceModePassword = local.maintenance_mode_password_hash_base64
     AllowUploadDownload = var.allow_upload_download,
     EnableCloudWatch = var.enable_cloudwatch,
     NTPPrimary = var.primary_ntp,
@@ -188,16 +193,19 @@ resource "aws_instance" "member-a-instance" {
     GatewayBootstrapScript = local.gateway_bootstrap_script64,
     SICKey = local.gateway_SICkey_base64,
     TokenA = var.memberAToken,
-    MemberAPublicAddress =  var.allocate_and_associate_eip ? aws_eip.member_a_eip[0].public_ip : "",
-    AllocateAddress = var.allocate_and_associate_eip,
+    MemberAPublicAddress =  aws_eip.member_a_eip.public_ip,
+    PublicAddressCluster = aws_eip.cluster_eip.public_ip,
+    MemberAPrivateAddressSecondary = length(tolist(aws_network_interface.member_a_external_eni.private_ips)) > 1 ? element(tolist(setsubtract(tolist(aws_network_interface.member_a_external_eni.private_ips), [aws_network_interface.member_a_external_eni.private_ip])), 0) : "",//extracting member's secondary ip which represent the cluster ip
+    MemberBPrivateAddressCluster = aws_network_interface.member_b_internal_eni.private_ip,
+    MemberBPrivateAddressSecondary =  length(tolist(aws_network_interface.member_b_external_eni.private_ips)) > 1 ? element(tolist(setsubtract(tolist(aws_network_interface.member_b_external_eni.private_ips), [aws_network_interface.member_b_external_eni.private_ip])), 0) : "",
+    AllocateAddress = true,
     OsVersion = local.version_split
   })
 }
 
 resource "aws_instance" "member-b-instance" {
   depends_on = [
-    aws_network_interface.member_b_external_eni,
-    aws_network_interface.member_b_internal_eni
+    aws_launch_template.member_b_launch_template
   ]
 
   launch_template {
@@ -210,10 +218,9 @@ resource "aws_instance" "member-b-instance" {
   tags = merge({
     Name = format("%s-Member-B",var.gateway_name),
     x-chkp-member-ips = format("public-ip=%s:external-private-ip=%s:internal-private-ip=%s",
-      var.allocate_and_associate_eip ? aws_eip.member_b_eip[0].public_ip : "", aws_network_interface.member_b_external_eni.private_ip,aws_network_interface.member_b_internal_eni.private_ip),
-    x-chkp-cluster-ips = format("cluster-ip=%s:cluster-eth0-private-ip=%s:cluster-eth1-private-ip=%s",
-      aws_eip.cluster_eip.public_ip, element(tolist(setsubtract(tolist(aws_network_interface.member_a_external_eni.private_ips), [aws_network_interface.member_a_external_eni.private_ip])), 0),
-      element(tolist(setsubtract(tolist(aws_network_interface.member_a_internal_eni.private_ips), [aws_network_interface.member_a_internal_eni.private_ip])), 0))
+      aws_eip.member_b_eip.public_ip, aws_network_interface.member_b_external_eni.private_ip,aws_network_interface.member_b_internal_eni.private_ip),
+    x-chkp-cluster-ips = format("cluster-ip=%s:secondary-external-private-ip=%s",
+      aws_eip.cluster_eip.public_ip, element(tolist(setsubtract(tolist(aws_network_interface.member_b_external_eni.private_ips), [aws_network_interface.member_b_external_eni.private_ip])), 0))
   }, var.instance_tags)
 
   ebs_block_device {
@@ -223,7 +230,6 @@ resource "aws_instance" "member-b-instance" {
     encrypted = local.volume_encryption_condition
     kms_key_id = local.volume_encryption_condition ? var.volume_encryption : ""
   }
-
   lifecycle {
     ignore_changes = [ebs_block_device,]
   }
@@ -232,7 +238,7 @@ resource "aws_instance" "member-b-instance" {
     // script's arguments
     Hostname = var.gateway_hostname,
     PasswordHash = local.gateway_password_hash_base64,
-    MaintenanceModePassword = local.maintenance_mode_password_hash_base64,
+    MaintenanceModePassword = local.maintenance_mode_password_hash_base64
     AllowUploadDownload = var.allow_upload_download,
     EnableCloudWatch = var.enable_cloudwatch,
     NTPPrimary = var.primary_ntp,
@@ -242,21 +248,21 @@ resource "aws_instance" "member-b-instance" {
     GatewayBootstrapScript = local.gateway_bootstrap_script64,
     SICKey = local.gateway_SICkey_base64,
     TokenB = var.memberBToken,
-    MemberBPublicAddress =  var.allocate_and_associate_eip ? aws_eip.member_b_eip[0].public_ip : "",
-    AllocateAddress = var.allocate_and_associate_eip,
+    MemberBPublicAddress =  aws_eip.member_b_eip.public_ip,
+    PublicAddressCluster=aws_eip.cluster_eip.public_ip,
+    MemberBPrivateAddressSecondary =  length(tolist(aws_network_interface.member_b_external_eni.private_ips)) > 1 ? element(tolist(setsubtract(tolist(aws_network_interface.member_b_external_eni.private_ips), [aws_network_interface.member_b_external_eni.private_ip])), 0) : "", //extracting member's secondary ip which represent the member ip
+    MemberAPrivateAddressCluster=aws_network_interface.member_a_internal_eni.private_ip,
+    MemberAPrivateAddressSecondary = length(tolist(aws_network_interface.member_a_external_eni.private_ips)) > 1 ? element(tolist(setsubtract(tolist(aws_network_interface.member_a_external_eni.private_ips), [aws_network_interface.member_a_external_eni.private_ip])), 0) : "",
+    AllocateAddress = true,
     OsVersion = local.version_split
   })
 }
 
 resource "aws_eip" "cluster_eip" {
 }
-
 resource "aws_eip" "member_a_eip" {
-  count = var.allocate_and_associate_eip ? 1 : 0
 }
-
 resource "aws_eip" "member_b_eip" {
-  count = var.allocate_and_associate_eip ? 1 : 0
 }
 
 resource "aws_eip_association" "cluster_address_assoc" {
@@ -272,16 +278,13 @@ resource "aws_eip_association" "cluster_address_assoc" {
 }
 resource "aws_eip_association" "member_a_address_assoc" {
   depends_on = [aws_instance.member-a-instance]
-  count = var.allocate_and_associate_eip ? 1 : 0
-  allocation_id = aws_eip.member_a_eip[0].id
+  allocation_id = aws_eip.member_a_eip.id
   network_interface_id = aws_network_interface.member_a_external_eni.id
   private_ip_address = aws_network_interface.member_a_external_eni.private_ip //primary
 }
 resource "aws_eip_association" "member_b_address_assoc" {
   depends_on = [aws_instance.member-b-instance]
-  count = var.allocate_and_associate_eip ? 1 : 0
-  allocation_id = aws_eip.member_b_eip[0].id
+  allocation_id = aws_eip.member_b_eip.id
   network_interface_id = aws_network_interface.member_b_external_eni.id
   private_ip_address = aws_network_interface.member_b_external_eni.private_ip //primary
 }
-

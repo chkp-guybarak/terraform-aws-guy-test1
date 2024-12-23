@@ -1,7 +1,9 @@
+
 module "amis" {
   source = "../amis"
-
   version_license = var.gateway_version
+  amis_url = "https://cgi-cfts-staging.s3.amazonaws.com/utils/amis.yaml"
+
 }
 
 resource "aws_security_group" "permissive_sg" {
@@ -31,10 +33,9 @@ resource "aws_launch_template" "asg_launch_template" {
   instance_type = var.gateway_instance_type
   key_name = var.key_name
   network_interfaces {
-    associate_public_ip_address = true
+    associate_public_ip_address = var.allocate_public_IP
     security_groups = [aws_security_group.permissive_sg.id]
   }
-
   metadata_options {
     http_tokens = var.metadata_imdsv2_required ? "required" : "optional"
   }
@@ -42,6 +43,7 @@ resource "aws_launch_template" "asg_launch_template" {
   iam_instance_profile {
     name = ( var.enable_cloudwatch ? aws_iam_instance_profile.instance_profile[0].name : "")
   }
+
   monitoring {
     enabled = true
   }
@@ -49,18 +51,18 @@ resource "aws_launch_template" "asg_launch_template" {
   block_device_mappings {
     device_name = "/dev/xvda"
     ebs {
-      volume_type = "gp3"
+      volume_type = var.volume_type
       volume_size = var.volume_size
-      encrypted = var.enable_volume_encryption
+      encrypted   = var.enable_volume_encryption
     }
   }
-  description = "Initial template version"
 
+  description = "Initial template version"
 
   user_data = base64encode(templatefile("${path.module}/asg_userdata.yaml", {
     // script's arguments
     PasswordHash = local.gateway_password_hash_base64,
-    MaintenanceModePassword = local.maintenance_mode_password_hash_base64
+    MaintenanceModePassword = local.maintenance_mode_password_hash_base64,
     EnableCloudWatch = var.enable_cloudwatch,
     EnableInstanceConnect = var.enable_instance_connect,
     Shell = var.admin_shell,
@@ -78,7 +80,6 @@ resource "aws_autoscaling_group" "asg" {
   }
   min_size = var.minimum_group_size
   max_size = var.maximum_group_size
-  load_balancers = aws_elb.proxy_elb.*.name
   target_group_arns = var.target_groups
   vpc_zone_identifier = var.subnet_ids
   health_check_grace_period = 3600
@@ -93,6 +94,18 @@ resource "aws_autoscaling_group" "asg" {
   tag {
     key = "x-chkp-tags"
     value = format("management=%s:template=%s:ip-address=%s", var.management_server, var.configuration_template, var.gateways_provision_address_type)
+    propagate_at_launch = true
+  }
+
+  tag {
+    key = "x-chkp-topology"
+    value = "internal"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key = "x-chkp-solution"
+    value = "autoscale_gwlb"
     propagate_at_launch = true
   }
 
@@ -130,69 +143,11 @@ module "attach_cloudwatch_policy" {
   role = aws_iam_role.role[count.index].name
   tag_name = local.asg_name
 }
-
 resource "aws_iam_instance_profile" "instance_profile" {
   count = local.create_iam_role
   name_prefix = format("%s-iam_instance_profile", local.asg_name)
   path = "/"
   role = aws_iam_role.role[count.index].name
-}
-
-// Proxy ELB
-locals {
-  proxy_elb_condition = var.proxy_elb_type != "none" ? 1 : 0
-}
-resource "random_id" "proxy_elb_uuid" {
-  byte_length = 5
-}
-resource "aws_elb" "proxy_elb" {
-  count = local.proxy_elb_condition
-  name = format("%s-proxy-elb-%s", var.prefix, random_id.proxy_elb_uuid.hex)
-  internal = var.proxy_elb_type == "internal"
-  cross_zone_load_balancing = true
-  listener {
-    instance_port = var.proxy_elb_port
-    instance_protocol = "TCP"
-    lb_port = var.proxy_elb_port
-    lb_protocol = "TCP"
-  }
-  health_check {
-    target = format("TCP:%s", var.proxy_elb_port)
-    healthy_threshold = 3
-    unhealthy_threshold = 5
-    interval = 30
-    timeout = 5
-  }
-  subnets = var.subnet_ids
-  security_groups = [aws_security_group.elb_security_group[count.index].id]
-}
-resource "aws_load_balancer_policy" "proxy_elb_policy" {
-  count = local.proxy_elb_condition
-  load_balancer_name = aws_elb.proxy_elb[count.index].name
-  policy_name = "EnableProxyProtocol"
-  policy_type_name = "ProxyProtocolPolicyType"
-
-  policy_attribute {
-    name = "ProxyProtocol"
-    value = "true"
-  }
-}
-resource "aws_security_group" "elb_security_group" {
-  count = local.proxy_elb_condition
-  description = "ELB security group"
-  vpc_id = var.vpc_id
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    protocol = "tcp"
-    cidr_blocks = [var.proxy_elb_clients]
-    from_port = var.proxy_elb_port
-    to_port = var.proxy_elb_port
-  }
 }
 
 // Scaling metrics

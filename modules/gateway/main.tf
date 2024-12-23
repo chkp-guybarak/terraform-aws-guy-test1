@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "gateway_role_assume_policy_document" {
 }
 
 module "attach_cloudwatch_policy" {
-  source = "../cloudwatch-policy"
+  source = "../cloudwatch_policy"
   count = local.enable_cloudwatch_policy
   role = aws_iam_role.gateway_iam_role[count.index].name
   tag_name = var.resources_tag_name != "" ? var.resources_tag_name : var.gateway_name

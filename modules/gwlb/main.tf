@@ -31,7 +31,7 @@ depends_on = [module.gateway_load_balancer]
 }
 
 module "autoscale_gwlb" {
-  source = "../autoscale-gwlb"
+  source = "../autoscale_gwlb"
   providers = {
     aws = aws
   }

@@ -130,7 +130,7 @@ resource "aws_launch_template" "management_launch_template" {
   description = "Initial launch template version"
 
   iam_instance_profile {
-    name = local.use_role == 1 ? (local.pre_role == 1 ? aws_iam_instance_profile.management_instance_profile[0].id : join("", (var.is_gwlb_iam == true ? module.cme_iam_role_gwlb.*.cme_iam_profile_name : module.cme_iam_role.*.cme_iam_profile_name))): ""
+    name = local.use_role == 1 ? (local.pre_role == 1 ? aws_iam_instance_profile.management_instance_profile[0].id : join("", (var.is_gwlb_iam == true ? module.cme-iam-role_gwlb.*.cme_iam_profile_name : module.cme-iam-role.*.cme_iam_profile_name))): ""
   }
 
   metadata_options {
@@ -193,7 +193,7 @@ resource "aws_instance" "management-instance" {
   })
 }
 
-module "cme_iam_role" {
+module "cme-iam-role" {
   source = "../cme-iam-role"
   count = local.new_instance_profile_general
 
@@ -201,8 +201,8 @@ module "cme_iam_role" {
   permissions = var.iam_permissions
 }
 
-module "cme_iam_role_gwlb" {
-  source = "../cme-iam-role-gwlb"
+module "cme-iam-role_gwlb" {
+  source = "../cme_iam_role_gwlb"
   count = local.new_instance_profile_gwlb
 
   sts_roles = var.sts_roles

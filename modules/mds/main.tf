@@ -105,7 +105,7 @@ resource "aws_security_group" "mds_sg" {
 resource "aws_iam_instance_profile" "mds_instance_profile" {
   count = local.use_role
   path = "/"
-  role = local.create_iam_role ? join("", module.cme_iam_role.*.cme_iam_role_name) : var.predefined_role
+  role = local.create_iam_role ? join("", module.cme-iam-role.*.cme-iam-role_name) : var.predefined_role
 }
 
 resource "aws_network_interface" "external-eni" {
@@ -177,7 +177,7 @@ resource "aws_instance" "mds-instance" {
   })
 }
 
-module "cme_iam_role" {
+module "cme-iam-role" {
   source = "../cme-iam-role"
   providers = {
     aws = aws
