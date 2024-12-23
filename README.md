@@ -49,7 +49,7 @@ Set up your AWS credentials and configure the default region by setting environm
 ```hcl
 export AWS_ACCESS_KEY_ID="{your-access-key-id}"
 export AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
-export AWS_DEFAULT_REGION={your-region}
+export AWS_DEFAULT_REGION="{your-region}"
 
 aws configure
 
@@ -58,7 +58,7 @@ aws configure
 ```hcl
 $env:AWS_ACCESS_KEY_ID="{your-access-key-id}"
 $env:AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
-$env:AWS_DEFAULT_REGION={your-region}
+$env:AWS_DEFAULT_REGION="{your-region}"
 
 aws configure
 ```
@@ -66,7 +66,7 @@ aws configure
 ```hcl
 set AWS_ACCESS_KEY_ID="{your-access-key-id}"
 set AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
-set AWS_DEFAULT_REGION={your-region}
+set AWS_DEFAULT_REGION="{your-region}"
 
 aws configure
 ```
