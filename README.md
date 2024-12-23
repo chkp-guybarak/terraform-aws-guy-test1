@@ -95,3 +95,4 @@ Apply the planned changes and deploy the resources:
 ```hcl
 terraform apply
 ```
+Note: The terraform apply command might vary slightly depending on the submodule configurations. Pay close attention to any additional instructions provided in the submodules' documentation to ensure correct usage and handling of the resources.
