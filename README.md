@@ -1,6 +1,5 @@
 # Terraform Modules for CloudGuard Network Security (CGNS) - AWS
 
-
 ## Introduction
 This repository provides a structured set of Terraform modules for deploying Check Point CloudGuard Network Security in Amazon Web Services (AWS). These modules automate the creation of Virtual Private Clouds (VPCs), Security Gateways, High-Availability architectures, and more, enabling secure and scalable cloud deployments.
 
@@ -25,7 +24,7 @@ Add the required module in your Terraform configuration file (`main.tf`) to depl
 
 ```hcl
 provider "aws" {
-  region = "us-west-2"
+  region = {your-region}
 }
 
 module "example_module" {
@@ -52,7 +51,6 @@ Set up your AWS credentials and configure the default region by setting environm
 ```hcl
 export AWS_ACCESS_KEY_ID="{your-access-key-id}"
 export AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
-export AWS_DEFAULT_REGION="us-west-2"
 
 aws configure
 
@@ -61,7 +59,6 @@ aws configure
 ```hcl
 $env:AWS_ACCESS_KEY_ID="{your-access-key-id}"
 $env:AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
-$env:AWS_DEFAULT_REGION="us-west-2"
 
 aws configure
 ```
@@ -69,7 +66,6 @@ aws configure
 ```hcl
 set AWS_ACCESS_KEY_ID="{your-access-key-id}"
 set AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
-set AWS_DEFAULT_REGION="us-west-2"
 
 aws configure
 ```
