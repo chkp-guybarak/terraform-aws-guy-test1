@@ -13,7 +13,7 @@ This repository provides a structured set of Terraform modules for deploying Che
 **Submodules:**
 
 
-Internal Submodules - 
+**Internal Submodules:**
 
 ___
 
@@ -23,9 +23,7 @@ ___
 Add the required module in your Terraform configuration file (`main.tf`) to deploy resources. For example:
 
 ```hcl
-provider "aws" {
-  region = {your-region}
-}
+provider "aws" { }
 
 module "example_module" {
   source  = "CheckPointSW/cloudguard-network-security/aws//modules/{module_name}"
@@ -51,6 +49,7 @@ Set up your AWS credentials and configure the default region by setting environm
 ```hcl
 export AWS_ACCESS_KEY_ID="{your-access-key-id}"
 export AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
+export AWS_DEFAULT_REGION={your-region}
 
 aws configure
 
@@ -59,6 +58,7 @@ aws configure
 ```hcl
 $env:AWS_ACCESS_KEY_ID="{your-access-key-id}"
 $env:AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
+$env:AWS_DEFAULT_REGION={your-region}
 
 aws configure
 ```
@@ -66,6 +66,7 @@ aws configure
 ```hcl
 set AWS_ACCESS_KEY_ID="{your-access-key-id}"
 set AWS_SECRET_ACCESS_KEY="{your-secret-access-key}"
+set AWS_DEFAULT_REGION={your-region}
 
 aws configure
 ```
