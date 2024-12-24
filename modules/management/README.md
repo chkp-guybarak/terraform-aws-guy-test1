@@ -1,4 +1,4 @@
-# Check Point CloudGuard Network Security Management Server Terraform module for AWS
+# Check Point CloudGuard Management Module
 
 Terraform module which deploys a Check Point CloudGuard Network Security Management Server into an existing VPC.
 
@@ -9,130 +9,15 @@ These types of Terraform resources are supported:
 * [EIP](https://www.terraform.io/docs/providers/aws/r/eip.html) - conditional creation
 * [IAM Role](https://www.terraform.io/docs/providers/aws/r/iam_role.html) - conditional creation
 
-See the [Security Management Server with CloudGuard for AWS](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk130372) for additional information
+See the [Security Management Server with CloudGuard for AWS](hhttps://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest2) for additional information
 
 This solution uses the following modules:
-- /terraform/aws/amis
-- /terraform/aws/cme-iam-role
+- amis
+- cme-iam-role
 
-## Configurations
-
-The **main.tf** file includes the following provider configuration block used to configure the credentials for the authentication with AWS, as well as a default region for your resources:
-```
-provider "aws" {
-  region = var.region
-  access_key = var.access_key
-  secret_key = var.secret_key
-}
-```
-The provider credentials can be provided either as static credentials or as [Environment Variables](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables).
-- Static credentials can be provided by adding an access_key and secret_key in /terraform/aws/management/**terraform.tfvars** file as follows:
-```
-region     = "us-east-1"
-access_key = "my-access-key"
-secret_key = "my-secret-key"
-```
-- In case the Static credentials are used, perform modifications described below:<br/>
-  a. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-module /terraform/aws/cme-iam-role:
-  ```
-  provider "aws" {
-  //  region = var.region
-  //  access_key = var.access_key
-  //  secret_key = var.secret_key
-  }
-  ```
-- In case the Environment Variables are used, perform modifications described below:<br/>
-  a. The next lines in main.tf file, in the provider aws resource, need to be commented:
-  ```
-  provider "aws" {
-  //  region = var.region
-  //  access_key = var.access_key
-  //  secret_key = var.secret_key
-  }
-  ```
-  b. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-module /terraform/aws/cme-iam-role:
-  ```
-  provider "aws" {
-  //  region = var.region
-  //  access_key = var.access_key
-  //  secret_key = var.secret_key
-  }
-  ```
 
 ## Usage
-- Fill all variables in the /terraform/aws/management/**terraform.tfvars** file with proper values (see below for variables descriptions).
-- From a command line initialize the Terraform configuration directory:
-    ```
-    terraform init
-    ```
-- Create an execution plan:
-    ```
-    terraform plan
-    ```
-- Create or modify the deployment:
-    ```
-    terraform apply
-    ```
-
-- Variables are configured in /terraform/aws/management/**terraform.tfvars** file as follows:
-
-  ```
-    //PLEASE refer to README.md for accepted values FOR THE VARIABLES BELOW
-    
-    // --- VPC Network Configuration ---
-    vpc_id = "vpc-12345678"
-    subnet_id = "subnet-abc123"
-    
-    // --- EC2 Instances Configuration ---
-    management_name = "CP-Management-tf"
-    management_instance_type = "m5.xlarge"
-    key_name = "publickey"
-    allocate_and_associate_eip = true
-    volume_size = 100
-    volume_encryption = "alias/aws/ebs"
-    enable_instance_connect = false
-    disable_instance_termination = false
-    instance_tags = {
-    key1 = "value1"
-    key2 = "value2"
-    }
-    
-    // --- IAM Permissions ---
-    iam_permissions = "Create with read permissions"
-    predefined_role = ""
-    sts_roles = []
-    
-    // --- Check Point Settings ---
-    management_version = "R81.20-BYOL"
-    admin_shell = "/etc/cli.sh"
-    management_password_hash = ""
-    management_maintenance_mode_password_hash = "" # For R81.10 and below the management_password_hash is used also as maintenance-mode password.
-    // --- Security Management Server Settings ---
-    management_hostname = "mgmt-tf"
-    management_installation_type = "Primary management"
-    SICKey = ""
-    allow_upload_download = "true"
-    gateway_management = "Locally managed"
-    admin_cidr = "0.0.0.0/0"
-    gateway_addresses = "0.0.0.0/0"
-    primary_ntp = ""
-    secondary_ntp = ""
-    management_bootstrap_script = "echo 'this is bootstrap script' > /home/admin/bootstrap.txt"
-  ```
-
-- Conditional creation
-    - To create an Elastic IP and associate it to the Management instance:
-  ```
-  allocate_and_associate_eip = true
-  ```
-  - To create IAM Role:
-  ```
-  iam_permissions = "Create with read permissions" | "Create with read-write permissions" | "Create with assume role permissions (specify an STS role ARN)"
-  ```
-- To tear down your resources:
-    ```
-    terraform destroy
-    ```
+Follow best practices for using CGNS modules on [the root page](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest#:~:text=Best%20Practices%20for%20Using%20Our%20Modules).
 
 ## Inputs
 | Name                                      | Description                                                                                                                                                                                                                                                                                                       | Type         | Allowed values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default                      | Required |
@@ -177,26 +62,3 @@ secret_key = "my-secret-key"
 | management_public_ip     | The deployed Security Management Server AWS public ip        |
 | management_url           | URL to the portal of the deployed Security Management Server |
 
-## Revision History
-In order to check the template version, please refer to [sk116585](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk116585)
-
-| Template Version  | Description                                                                                                   |
-|-------------------|---------------------------------------------------------------------------------------------------------------|
-| 20241027          | R82 version support                                                                                           |
-| 20240704          | - R80.40 version deprecation.<br/>- R81 version deprecation.                                                  |
-| 20240515          | Add support for requiring use instance metadata service version 2 (IMDSv2) only                               |
-| 20240207          | Added Log Server installation support                                                                         |
-| 20231012          | Update AWS Terraform provider version to 5.20.1                                                               |
-| 20230923          | Add support for C5d instance type                                                                             |
-| 20230914          | Add support for maintenance mode password                                                                     |
-| 20230829          | Change default Check Point version to R81.20                                                                  |
-| 20230806          | Add support for c6in instance type                                                                            | 
-| 20230521          | - Change default shell for the admin user to /etc/cli.sh<br/>- Add description for reserved words in hostname |
-| 20221123          | R81.20 version support                                                                                        |
-| 20220606          | New instance type support                                                                                     |
-| 20210329          | Stability fixes                                                                                               |
-| 20210309          | First release of Check Point Security Management Server Terraform module for AWS                              |
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details

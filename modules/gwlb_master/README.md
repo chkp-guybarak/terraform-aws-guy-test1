@@ -1,4 +1,4 @@
-# Check Point CloudGuard Network Gateway Load Balancer Master Terraform module for AWS
+# Check Point CloudGuard Gateway Load Balancer Master Module
 
 Terraform module which deploys an AWS Auto Scaling group configured for Gateway Load Balancer into a new VPC.
 
@@ -15,146 +15,15 @@ These types of Terraform resources are supported:
 See the [Check Point CloudGuard Gateway Load Balancer on AWS](https://sc1.checkpoint.com/documents/IaaS/WebAdminGuides/EN/CP_CloudGuard_Network_for_AWS_Centralized_Gateway_Load_Balancer/Content/Topics-AWS-GWLB-VPC-DG/Introduction.htm) for additional information
 
 This solution uses the following modules:
-- /terraform/aws/autoscale_gwlb
-- /terraform/aws/management
-- /terraform/aws/cme_iam_role_gwlb
-- /terraform/aws/amis
-- /terraform/aws/vpc
-## Configurations
-
-The **main.tf** file includes the following provider configuration block used to configure the credentials for the authentication with AWS, as well as a default region for your resources:
-```
-provider "aws" {
-    region = var.region
-    access_key = var.aws_access_key_ID
-    secret_key = var.aws_secret_access_key
-}
-```
-The provider credentials can be provided either as static credentials or as [Environment Variables](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables).
-- Static credentials can be provided by adding an access_key and secret_key in /terraform/aws/qs_autoscale/**terraform.tfvars** file as follows:
-```
-region     = "us-east-1"
-access_key = "my-access-key"
-secret_key = "my-secret-key"
-```
-- In case the Static credentials are used, perform modifications described below:<br/>
-  a. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-modules /terraform/aws/autoscale_gwlb, /terraform/aws/management and /terraform/aws/cme_iam_role_gwlb:
-  ```
-  provider "aws" {
-  //  region = var.region
-  //  access_key = var.access_key
-  //  secret_key = var.secret_key
-  }
-  ```
-- In case the Environment Variables are used, perform modifications described below:<br/>
-  a. The next lines in main.tf file, in the provider aws resource, need to be commented:
-  ```
-  provider "aws" {
-  //    region = var.region
-  //    access_key = var.aws_access_key_ID
-  //    secret_key = var.aws_secret_access_key
-  }
-  ```
-  b. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-modules /terraform/aws/autoscale, /terraform/aws/management and /terraform/aws/cme_iam_role_gwlb:
-  ```
-  provider "aws" {
-  //    region = var.region
-  //    access_key = var.aws_access_key_ID
-  //    secret_key = var.aws_secret_access_key
-  }
-  ```
+- autoscale_gwlb
+- management
+- cme_iam_role_gwlb
+- amis
+- vpc
  
 ## Usage
-- Fill all variables in the /terraform/aws/gwlb/**terraform.tfvars** file with proper values (see below for variables descriptions).
-- From a command line initialize the Terraform configuration directory:
-    ```
-    terraform init
-    ```
-- Create an execution plan:
-    ```
-    terraform plan
-    ```
-  - Create or modify the deployment:
-      ```
-      terraform apply
-      ```
-  
-    - Variables are configured in /terraform/aws/qs_autoscale/**terraform.tfvars** file as follows:
+Follow best practices for using CGNS modules on [the root page](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest#:~:text=Best%20Practices%20for%20Using%20Our%20Modules).
 
-      ```
-        //PLEASE refer to README.md for accepted values FOR THE VARIABLES BELOW
-
-    
-      // --- Network Configuration ---
-      vpc_cidr = "10.0.0.0/16"
-      public_subnets_map = {
-       "us-east-1a" = 1
-       "us-east-1b" = 2
-      }
-      subnets_bit_length = 8
-        
-      // --- General Settings ---
-      key_name = "publickey"
-      enable_volume_encryption = true
-      volume_size = 100
-      enable_instance_connect = false
-      disable_instance_termination = false
-      allow_upload_download = true
-      management_server = "CP-Management-gwlb-tf"
-      configuration_template = "gwlb-configuration"
-      admin_shell = "/etc/cli.sh"
-        
-      // --- Gateway Load Balancer Configuration ---
-      gateway_load_balancer_name = "gwlb1"
-      target_group_name = "tg1"
-      connection_acceptance_required = "false"
-      enable_cross_zone_load_balancing = "true"
-        
-      // --- Check Point CloudGuard IaaS Security Gateways Auto Scaling Group Configuration ---
-      gateway_name = "Check-Point-GW-tf"
-      gateway_instance_type = "c5.xlarge"
-      minimum_group_size = 2
-      maximum_group_size = 10
-      gateway_version = "R81.20-BYOL"
-      gateway_password_hash = ""
-      gateway_maintenance_mode_password_hash = "" # For R81.10 and below the gateway_password_hash is used also as maintenance-mode password.
-      gateway_SICKey = "12345678"
-      gateways_provision_address_type = "private"
-      allocate_public_IP = false
-      enable_cloudwatch = false
-      gateway_bootstrap_script = "echo 'this is bootstrap script' > /home/admin/bootstrap.txt"
-        
-      // --- Check Point CloudGuard IaaS Security Management Server Configuration ---
-      management_deploy = true
-      management_instance_type = "m5.xlarge"
-      management_version = "R81.20-BYOL"
-      management_password_hash = ""
-      management_maintenance_mode_password_hash = "" # For R81.10 and below the management_password_hash is used also as maintenance-mode password.
-      gateways_policy = "Standard"
-      gateway_management = "Locally managed"
-      admin_cidr = ""
-      gateways_addresses = ""
-        
-      // --- Other parameters ---
-      volume_type = "gp3"
-        
-        
-    ```
-
-- Conditional creation
-  - To enable cloudwatch for gwlb_master:
-  ```
-  enable_cloudwatch = true
-  ```
-  Note: enabling cloudwatch will automatically create IAM role with cloudwatch:PutMetricData permission
-  - To deploy Security Management Server:
-  ```
-  management_deploy = true
-  ```
-- To tear down your resources:
-    ```
-    terraform destroy
-    ```
 
 ## Inputs
 | Name                                      | Description                                                                                                                                                                                                                                                                                                       | Type   | Allowed values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Default               | Required |
@@ -210,28 +79,3 @@ secret_key = "my-secret-key"
 | gwlb_name           | The name of the deployed Gateway Load Balancer                                        |
 | gwlb_service_name   | The service name for the deployed Gateway Load Balancer                               |
 | gwlb_arn            | The arn for the deployed Gateway Load Balancer                                        |
-
-
-## Revision History
-In order to check the template version, please refer to [sk116585](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk116585)
-
-| Template Version | Description                                                                                 |
-|------------------|---------------------------------------------------------------------------------------------|
-| 20241027         | R82 version support                                                                         |
-| 20240704         | R80.40 version deprecation                                                                  |
-| 20240515         | Add support for requiring use instance metadata service version 2 (IMDSv2) only             |
-| 20231012         | Update AWS Terraform provider version to 5.20.1                                             |
-| 20230923         | Add support for C5d instance type                                                           |
-| 20230914         | Add support for maintenance mode password                                                   |
-| 20230910         | Add bootstrap script execution option for deployed gateways                                 |
-| 20230829         | Change default Check Point version to R81.20                                                |
-| 20230806         | Add support for c6in instance type                                                          | 
-| 20230521         | Change default shell for the admin user to /etc/cli.sh                                      |
-| 20221215         | Support ASG Launch Template instead of Launch Configuration                                 |
-| 20221123         | R81.20 version support                                                                      |
-| 20220606         | New instance type support                                                                   |
-| 20220414         | First release of Check Point CloudGuard Network Gateway Load Balancer master module for AWS |
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details
