@@ -42,8 +42,14 @@ This repository provides a structured set of Terraform modules for deploying Che
 * [`amis`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/amis)
 * [`cloudwatch_policy`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/cloudwatch_policy)
 * [`cluster_iam_role`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/cluster_iam_role)
-* [`common`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common)
 * [`custom_autoscale`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/custom_autoscale)
+* [`elastic_ip`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common/elastic_ip)
+* [`gateway_instance`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common/gateway_instance)
+* [`instance_type`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common/instance_type)
+* [`internal_default_route`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common/internal_default_route)
+* [`load_balancer`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common/load_balancer)
+* [`permissive_sg`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common/permissive_sg)
+* [`version_license`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common/version_license)
 * [`vpc`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/vpc)
 
 
