@@ -60,7 +60,7 @@ This repository provides a structured set of Terraform modules for deploying Che
 * [`vpc`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/vpc)
 
 
-___
+***
 
 # Best Practices for Using CloudGuard Modules
 
