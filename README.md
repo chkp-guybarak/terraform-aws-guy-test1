@@ -1,3 +1,10 @@
+![GitHub Wachers](https://img.shields.io/github/watchers/chkp-guybarak/terraform-aws-guy-test1)
+![GitHub Release](https://img.shields.io/github/v/release/chkp-guybarak/terraform-aws-guy-test1)
+![GitHub Commits Since Last Commit](https://img.shields.io/github/commits-since/chkp-guybarak/terraform-aws-guy-test1/latest/main)
+![GitHub Last Commit](https://img.shields.io/github/last-commit/chkp-guybarak/terraform-aws-guy-test1/main)
+![GitHub Repo Size](https://img.shields.io/github/repo-size/chkp-guybarak/terraform-aws-guy-test1)
+![GitHub Downloads](https://img.shields.io/github/downloads/chkp-guybarak/terraform-aws-guy-test1/total)
+
 # Terraform Modules for CloudGuard Network Security (CGNS) - AWS
 
 ## Introduction
