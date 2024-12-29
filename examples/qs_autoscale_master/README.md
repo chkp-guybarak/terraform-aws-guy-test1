@@ -17,11 +17,11 @@ These types of Terraform resources are supported:
 See the [Check Point CloudGuard Auto Scaling on AWS](https://aws.amazon.com/quickstart/architecture/check-point-cloudguard/) for additional information
 
 This solution uses the following modules:
-- /terraform/aws/qs_autoscale
-- /terraform/aws/autoscale
-- /terraform/aws/management
-- /terraform/aws/cme-iam-role
-- /terraform/aws/vpc
+- qs_autoscale
+- autoscale
+- management
+- cme-iam-role
+- vpc
 
 ## Configurations
 

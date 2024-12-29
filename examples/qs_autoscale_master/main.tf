@@ -13,7 +13,7 @@ module "launch_qs_autoscale" {
     aws = aws
   }
 
-  region = var.region
+  
   prefix = var.prefix
   asg_name = var.asg_name
   vpc_id = module.launch_vpc.vpc_id
