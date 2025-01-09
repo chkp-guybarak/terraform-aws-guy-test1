@@ -23,7 +23,7 @@ Follow best practices for using CGNS modules on [the root page](https://registry
 
 **Instead of the standard terraform apply command, use the following:**
 ```
-    terraform apply -target=module.gateway-test.aws_route_table.private_subnet_rtb -auto-approve && terraform apply 
+    terraform apply -target=module.{module_name}.aws_route_table.private_subnet_rtb -auto-approve && terraform apply 
 ```
 
 

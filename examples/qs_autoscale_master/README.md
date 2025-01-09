@@ -20,7 +20,7 @@ This solution uses the following modules:
 - qs_autoscale
 - autoscale
 - management
-- cme-iam-role
+- cme_iam_role
 - vpc
 
 ## Configurations
@@ -41,7 +41,7 @@ access_key = "my-access-key"
 secret_key = "my-secret-key"
 ```
 - In case the Static credentials are used, perform modifications described below:<br/>
-  a. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-modules /terraform/aws/qs_autoscale, /terraform/aws/autoscale, /terraform/aws/management and /terraform/aws/cme-iam-role:
+  a. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-modules /terraform/aws/qs_autoscale, /terraform/aws/autoscale, /terraform/aws/management and /terraform/aws/cme_iam_role:
   ```
   provider "aws" {
   //  region = var.region

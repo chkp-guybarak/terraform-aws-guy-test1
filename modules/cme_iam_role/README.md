@@ -23,7 +23,7 @@ provider "aws" {
 }
 ```
 The provider credentials can be provided either as static credentials or as [Environment Variables](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables).
-- Static credentials can be provided by adding an access_key and secret_key in /terraform/aws/cme-iam-role/**terraform.tfvars** file as follows:
+- Static credentials can be provided by adding an access_key and secret_key in /terraform/aws/cme_iam_role/**terraform.tfvars** file as follows:
 ```
 region     = "us-east-1"
 access_key = "my-access-key"
@@ -40,7 +40,7 @@ secret_key = "my-secret-key"
   ```
   
 ## Usage
-- Fill all variables in the /terraform/aws/cme-iam-role/**terraform.tfvars** file with proper values (see below for variables descriptions).
+- Fill all variables in the /terraform/aws/cme_iam_role/**terraform.tfvars** file with proper values (see below for variables descriptions).
 - From a command line initialize the Terraform configuration directory:
     ```
     terraform init
@@ -54,7 +54,7 @@ secret_key = "my-secret-key"
     terraform apply
     ```
 
-- Variables are configured in /terraform/aws/cme-iam-role/**terraform.tfvars** file as follows:
+- Variables are configured in /terraform/aws/cme_iam_role/**terraform.tfvars** file as follows:
 
   ```
     //PLEASE refer to README.md for accepted values FOR THE VARIABLES BELOW
@@ -81,8 +81,8 @@ secret_key = "my-secret-key"
 ## Outputs
 | Name                 | Description                           |
 |----------------------|---------------------------------------|
-| cme-iam-role_arn     | The created AWS IAM Role arn          |
-| cme-iam-role_name    | The created AWS IAM Role name         |
+| cme_iam_role_arn     | The created AWS IAM Role arn          |
+| cme_iam_role_name    | The created AWS IAM Role name         |
 | cme_iam_profile_name | The created AWS instance profile name |
 | cme_iam_profile_arn  | The created AWS instance profile arn  |
 

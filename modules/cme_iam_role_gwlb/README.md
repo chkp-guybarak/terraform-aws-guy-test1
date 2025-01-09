@@ -81,8 +81,8 @@ secret_key = "my-secret-key"
 ## Outputs
 | Name                 | Description                           |
 |----------------------|---------------------------------------|
-| cme-iam-role_arn     | The created AWS IAM Role arn          |
-| cme-iam-role_name    | The created AWS IAM Role name         |
+| cme_iam_role_arn     | The created AWS IAM Role arn          |
+| cme_iam_role_name    | The created AWS IAM Role name         |
 | cme_iam_profile_name | The created AWS instance profile name |
 | cme_iam_profile_arn  | The created AWS instance profile arn  |
 

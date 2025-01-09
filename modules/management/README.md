@@ -13,7 +13,7 @@ See the [Security Management Server with CloudGuard for AWS](hhttps://registry.t
 
 This solution uses the following modules:
 - amis
-- cme-iam-role
+- cme_iam_role
 
 
 ## Usage

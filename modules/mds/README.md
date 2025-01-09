@@ -12,7 +12,7 @@ See the [Multi-Domain Management Deployment on AWS](https://supportcenter.us.che
 
 This solution uses the following modules:
 - /terraform/aws/amis
-- /terraform/aws/cme-iam-role
+- /terraform/aws/cme_iam_role
 
 ## Configurations
 
@@ -32,7 +32,7 @@ access_key = "my-access-key"
 secret_key = "my-secret-key"
 ```
 - In case the Static credentials are used, perform modifications described below:<br/>
-  a. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-module /terraform/aws/cme-iam-role:
+  a. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-module /terraform/aws/cme_iam_role:
   ```
   provider "aws" {
   //  region = var.region
@@ -49,7 +49,7 @@ secret_key = "my-secret-key"
   //  secret_key = var.secret_key
   }
   ```
-  b. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-module /terraform/aws/cme-iam-role:
+  b. The next lines in main.tf file, in the provider aws resource, need to be commented for sub-module /terraform/aws/cme_iam_role:
   ```
   provider "aws" {
   //  region = var.region
