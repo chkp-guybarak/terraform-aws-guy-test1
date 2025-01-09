@@ -54,7 +54,7 @@ secret_key = "my-secret-key"
     ```
 - Create or modify the deployment:
     ```
-    terraform apply -target=aws_route_table.private_subnet_rtb -auto-approve && terraform apply 
+    terraform apply -target=module.{module_name}.aws_route_table.private_subnet_rtb -auto-approve && terraform apply 
     ```
   
   - Variables are configured in /terraform/aws/cluster/**terraform.tfvars** file as follows:

@@ -72,7 +72,7 @@ secret_key = "my-secret-key"
 - Create or modify the deployment:
     - Due to terraform limitation, the apply command is:
     ```
-    terraform apply -target=aws_route_table.private_subnet_rtb -auto-approve && terraform apply 
+    terraform apply -target=module.{module_name}.aws_route_table.private_subnet_rtb -auto-approve && terraform apply 
     ```
     >Once terraform is updated, we will update accordingly.
   
