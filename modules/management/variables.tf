@@ -175,3 +175,14 @@ variable "is_gwlb_iam" {
   type = bool
   default = false
 }
+variable "security_rules" {
+  description = "Additional security rules for the security group"
+  type = list(object({
+    from_port   = any
+    to_port     = any
+    protocol    = any
+    cidr_blocks = list(any)
+    
+  }))
+  default = []
+}

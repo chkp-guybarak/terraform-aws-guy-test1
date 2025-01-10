@@ -24,6 +24,7 @@ resource "aws_route_table_association" "private_rtb_to_private_subnets" {
 
 module "launch_gateway_into_vpc" {
   source = "../gateway"
+  security_rules = var.security_rules
   vpc_id = module.launch_vpc.vpc_id
   public_subnet_id = module.launch_vpc.public_subnets_ids_list[0]
   private_subnet_id = module.launch_vpc.private_subnets_ids_list[0]
