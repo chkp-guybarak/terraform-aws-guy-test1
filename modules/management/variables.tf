@@ -178,6 +178,7 @@ variable "is_gwlb_iam" {
 variable "security_rules" {
   description = "Additional security rules for the security group"
   type = list(object({
+    direction   = string
     from_port   = any
     to_port     = any
     protocol    = any

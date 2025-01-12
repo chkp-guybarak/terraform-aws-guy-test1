@@ -108,14 +108,15 @@ resource "aws_security_group" "management_sg" {
       protocol    = egress.value.protocol
       cidr_blocks = egress.value.cidr_blocks
     }
-  }
-  dynamic "ingress" {
-    for_each = length([for rule in var.security_rules : rule if rule.direction == "ingress"]) == 0 ? [1] : [] # Create default ingress rule only if no ingress rules exist
-    content {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
+  }  
+  dynamic egress {
+    for_each = length([for rule in var.security_rules : rule if rule.direction == "egress"]) == 0 ? [1] : []
+
+    content{
+        from_port    = 0
+        to_port      = 0
+        protocol     = "-1"
+        cidr_blocks  = ["0.0.0.0/0"]
     }
   }
 }
@@ -217,7 +218,7 @@ resource "aws_instance" "management-instance" {
 }
 
 module "cme_iam_role" {
-  source = "../cme-iam-role"
+  source = "../cme_iam_role"
   count = local.new_instance_profile_general
 
   sts_roles = var.sts_roles
@@ -225,7 +226,7 @@ module "cme_iam_role" {
 }
 
 module "cme_iam_role_gwlb" {
-  source = "../cme-iam-role-gwlb"
+  source = "../cme_iam_role_gwlb"
   count = local.new_instance_profile_gwlb
 
   sts_roles = var.sts_roles
