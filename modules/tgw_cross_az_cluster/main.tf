@@ -1,8 +1,6 @@
 module "cluster_into_vpc" {
   source = "../cross_az_cluster"
-  providers = {
-    aws = aws
-  }
+
 
   vpc_id = var.vpc_id
   public_subnet_ids = tolist([var.public_subnet_1, var.public_subnet_2])

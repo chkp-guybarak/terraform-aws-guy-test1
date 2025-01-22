@@ -37,9 +37,7 @@ module "external_load_balancer" {
 
 module "autoscale" {
   source = "../autoscale"
-  providers = {
-    aws = aws
-  }
+
 
   prefix = var.prefix
   asg_name = var.asg_name
@@ -69,9 +67,7 @@ module "autoscale" {
 data "aws_region" "current"{}
 
 module "management" {
-  providers = {
-    aws = aws
-  }
+
   count = local.deploy_management_condition ? 1 : 0
   source = "../management"
 

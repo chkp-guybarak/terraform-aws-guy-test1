@@ -1,6 +1,7 @@
 resource "aws_security_group" "permissive_sg" {
   description = "Permissive security group"
   vpc_id = var.vpc_id
+  
   dynamic "ingress" {
     for_each = [for rule in var.security_rules : rule if rule.direction == "ingress"]
     content {
@@ -10,9 +11,9 @@ resource "aws_security_group" "permissive_sg" {
       cidr_blocks = ingress.value.cidr_blocks
     }
   }  
+
   dynamic ingress {
     for_each = length([for rule in var.security_rules : rule if rule.direction == "ingress"]) == 0 ? [1] : []
-
     content{
         from_port    = 0
         to_port      = 0
@@ -20,6 +21,7 @@ resource "aws_security_group" "permissive_sg" {
         cidr_blocks  = ["0.0.0.0/0"]
     }
   }
+
   dynamic "egress" {
     for_each = [for rule in var.security_rules : rule if rule.direction == "egress"]
     content {
@@ -29,9 +31,9 @@ resource "aws_security_group" "permissive_sg" {
       cidr_blocks = egress.value.cidr_blocks
     }
   }  
+
   dynamic egress {
     for_each = length([for rule in var.security_rules : rule if rule.direction == "egress"]) == 0 ? [1] : []
-
     content{
         from_port    = 0
         to_port      = 0
@@ -39,6 +41,7 @@ resource "aws_security_group" "permissive_sg" {
         cidr_blocks  = ["0.0.0.0/0"]
     }
   }
+  
   name_prefix = format("%s-PermissiveSecurityGroup", var.resources_tag_name != "" ? var.resources_tag_name : var.gateway_name) // Group name
   tags = {
     Name = format("%s-PermissiveSecurityGroup", var.resources_tag_name != "" ? var.resources_tag_name : var.gateway_name) // Resource name

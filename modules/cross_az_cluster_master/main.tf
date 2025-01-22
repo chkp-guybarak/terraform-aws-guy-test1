@@ -29,14 +29,13 @@ resource "aws_route_table_association" "private_rtb_to_private_subnets_b" {
 
 module "launch_cluster_into_vpc" {
   source = "../cross_az_cluster"
-  providers = {
-    aws = aws
-  }
+
 
   vpc_id = module.launch_vpc.vpc_id
   public_subnet_ids = module.launch_vpc.public_subnets_ids_list
   private_subnet_ids = module.launch_vpc.private_subnets_ids_list
   private_route_table = aws_route_table.private_subnet_rtb.id
+  security_rules = var.security_rules
   gateway_name = var.gateway_name
   gateway_instance_type = var.gateway_instance_type
   key_name = var.key_name

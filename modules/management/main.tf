@@ -82,13 +82,13 @@ resource "aws_security_group" "management_sg" {
     protocol = "tcp"
     cidr_blocks = [var.admin_cidr]
   }
+  
   ingress {
     from_port = 19009
     to_port = 19009
     protocol = "tcp"
     cidr_blocks = [var.admin_cidr]
   }
-    // Add dynamic rules from the "security_rules" variable
   
   dynamic "ingress" {
     for_each = [for rule in var.security_rules : rule if rule.direction == "ingress"]
@@ -109,9 +109,9 @@ resource "aws_security_group" "management_sg" {
       cidr_blocks = egress.value.cidr_blocks
     }
   }  
+
   dynamic egress {
     for_each = length([for rule in var.security_rules : rule if rule.direction == "egress"]) == 0 ? [1] : []
-
     content{
         from_port    = 0
         to_port      = 0

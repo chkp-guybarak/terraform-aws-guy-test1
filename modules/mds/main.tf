@@ -94,11 +94,34 @@ resource "aws_security_group" "mds_sg" {
     cidr_blocks = [var.admin_cidr]
   }
 
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+  dynamic "ingress" {
+    for_each = [for rule in var.security_rules : rule if rule.direction == "ingress"]
+    content {
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }
+
+  dynamic "egress" {
+    for_each = [for rule in var.security_rules : rule if rule.direction == "egress"]
+    content {
+      from_port   = egress.value.from_port
+      to_port     = egress.value.to_port
+      protocol    = egress.value.protocol
+      cidr_blocks = egress.value.cidr_blocks
+    }
+  }  
+
+  dynamic egress {
+    for_each = length([for rule in var.security_rules : rule if rule.direction == "egress"]) == 0 ? [1] : []
+    content{
+        from_port    = 0
+        to_port      = 0
+        protocol     = "-1"
+        cidr_blocks  = ["0.0.0.0/0"]
+    }
   }
 }
 
@@ -179,9 +202,6 @@ resource "aws_instance" "mds-instance" {
 
 module "cme_iam_role" {
   source = "../cme_iam_role"
-  providers = {
-    aws = aws
-  }
   count = local.create_iam_role ? 1 : 0
 
   sts_roles = var.sts_roles

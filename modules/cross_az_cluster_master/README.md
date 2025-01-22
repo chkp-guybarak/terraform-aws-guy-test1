@@ -94,7 +94,7 @@ secret_key = "my-secret-key"
     }
     private_subnets_map = {
       "us-east-1a" = 3
-      "us-east-1a" = 4
+      "us-east-1b" = 4
     }
     subnets_bit_length = 8
 

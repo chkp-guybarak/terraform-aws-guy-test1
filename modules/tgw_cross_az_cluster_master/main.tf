@@ -28,9 +28,7 @@ resource "aws_route_table_association" "private_rtb_to_private_subnet2" {
 module "tgw_cluster_into_vpc" {
   depends_on = [module.launch_vpc, aws_route_table.private_subnet_rtb]
   source = "../tgw-cross_az_cluster"
-  providers = {
-    aws = aws
-  }
+
 
   vpc_id = module.launch_vpc.vpc_id
   public_subnet_1 = module.launch_vpc.public_subnets_ids_list[0]

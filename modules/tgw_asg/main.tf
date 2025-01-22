@@ -1,8 +1,6 @@
 module "autoscale" {
   source = "../autoscale"
-  providers = {
-    aws = aws
-  }
+
 
   vpc_id = var.vpc_id
   subnet_ids = var.gateways_subnets
@@ -29,9 +27,7 @@ module "autoscale" {
 data "aws_region" "current"{}
 
 module "management" {
-  providers = {
-    aws = aws
-  }
+
   count = local.deploy_management_condition ? 1 : 0
   source = "../management"
 

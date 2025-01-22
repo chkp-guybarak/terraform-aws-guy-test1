@@ -23,13 +23,12 @@ resource "aws_route_table_association" "private_rtb_to_private_subnets" {
 }
 module "launch_cluster_into_vpc" {
   source = "../cluster"
-  providers = {
-    aws = aws
-  }
+
 
   vpc_id = module.launch_vpc.vpc_id
   public_subnet_id = module.launch_vpc.public_subnets_ids_list[0]
   private_subnet_id = module.launch_vpc.private_subnets_ids_list[0]
+  security_rules = var.security_rules
   private_route_table = aws_route_table.private_subnet_rtb.id
   gateway_name = var.gateway_name
   gateway_instance_type = var.gateway_instance_type

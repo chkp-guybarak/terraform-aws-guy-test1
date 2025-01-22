@@ -59,6 +59,30 @@ This repository provides a structured set of Terraform modules for deploying Che
 * [`version_license`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/common/version_license)
 * [`vpc`](https://registry.terraform.io/modules/chkp-guybarak/guy-test1/aws/latest/submodules/vpc)
 
+# AWS Terraform Security Group Configuration
+
+## Default Security Rules
+Each submodule in this repository includes **preconfigured security group rules** designed to ensure the solution works properly out of the box. These rules are tailored for the default deployment scenarios but may require adjustments to meet your specific security and compliance requirements.
+
+**Example:** To restrict inbound\outbound traffic, update the security_rules attribute in the submodule configuration:
+
+```hcl
+  security_rules = [
+    {
+      direction   = "ingress"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["10.0.0.0/30"]
+    }
+  ]
+```
+
+## Customizing Security Rules
+
+To customize security rules, you can update the `ingress` and `egress` attributes in your security group configuration.
+
+### Example: Restricting Inbound Traffic
 
 ***
 

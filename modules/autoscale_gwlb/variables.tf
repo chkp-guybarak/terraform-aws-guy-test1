@@ -9,7 +9,11 @@ variable "prefix" {
 variable "asg_name" {
   type = string
   description = "Autoscaling Group name"
-  default = "Check-Point-ASG-tf"
+  default = "Check-Point-Security-Gateway-AutoScaling-Group-tf"
+  validation {
+    condition     = length(var.asg_name) <= 100
+    error_message = "Autoscaling Group name can not exceed 100 characters."
+  }
 }
 
 // --- VPC Network Configuration ---

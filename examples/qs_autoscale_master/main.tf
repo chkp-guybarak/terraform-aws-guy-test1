@@ -9,9 +9,7 @@ module "launch_vpc" {
 
 module "launch_qs_autoscale" {
   source = "../qs_autoscale"
-  providers = {
-    aws = aws
-  }
+
 
   
   prefix = var.prefix
