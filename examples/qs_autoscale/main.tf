@@ -18,7 +18,7 @@ resource "aws_security_group" "external_alb_security_group" {
 }
 
 module "external_load_balancer" {
-  source = "../common/load_balancer"
+  source = "../../modules/common/load_balancer"
 
   load_balancers_type = var.load_balancers_type
   instances_subnets = var.gateways_subnets
@@ -36,7 +36,7 @@ module "external_load_balancer" {
 }
 
 module "autoscale" {
-  source = "../autoscale"
+  source = "../../modules/autoscale"
 
 
   prefix = var.prefix
@@ -69,7 +69,7 @@ data "aws_region" "current"{}
 module "management" {
 
   count = local.deploy_management_condition ? 1 : 0
-  source = "../management"
+  source = "../../modules/management"
 
   vpc_id = var.vpc_id
   subnet_id = var.gateways_subnets[0]
@@ -117,7 +117,7 @@ resource "aws_security_group" "internal_security_group" {
 
 module "internal_load_balancer" {
   count = local.deploy_servers_condition ? 1 : 0
-  source = "../common/load_balancer"
+  source = "../../modules/common/load_balancer"
 
   load_balancers_type = var.load_balancers_type
   instances_subnets = var.servers_subnets
@@ -137,7 +137,7 @@ module "internal_load_balancer" {
 
 module "custom_autoscale" {
   count = local.deploy_servers_condition ? 1 : 0
-  source = "../custom_autoscale"
+  source = "../../modules/custom_autoscale"
 
   prefix = var.prefix
   asg_name = var.asg_name
