@@ -181,6 +181,7 @@ variable "security_rules" {
     protocol    = string
     cidr_blocks = list(string)
   }))
+  
   default = []
 }
 
