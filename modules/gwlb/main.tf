@@ -1,7 +1,7 @@
 
 
 module "gateway_load_balancer" {
-  source = "../common/load_balancer"
+  source = "../load_balancer"
 
   load_balancers_type = "gateway"
   instances_subnets = var.subnet_ids

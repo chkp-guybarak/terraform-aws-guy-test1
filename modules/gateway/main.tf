@@ -6,7 +6,7 @@ module "amis" {
 }
 
 module "common_permissive_sg" {
-  source = "../common/permissive_sg"
+  source = "../permissive_sg"
   security_rules = var.security_rules
   vpc_id = var.vpc_id
   resources_tag_name = var.resources_tag_name
@@ -62,7 +62,7 @@ resource "aws_network_interface" "private_eni" {
 }
 
 module "common_eip" {
-  source = "../common/elastic_ip"
+  source = "../elastic_ip"
   depends_on = [
     module.common_gateway_instance
   ]
@@ -73,14 +73,14 @@ module "common_eip" {
 }
 
 module "common_internal_default_route" {
-  source = "../common/internal_default_route"
+  source = "../internal_default_route"
 
   private_route_table = var.private_route_table
   internal_eni_id = aws_network_interface.private_eni.id
 }
 
 module "common_gateway_instance" {
-  source = "../common/gateway_instance"
+  source = "../gateway_instance"
 
   external_eni_id = aws_network_interface.public_eni.id
   internal_eni_id = aws_network_interface.private_eni.id

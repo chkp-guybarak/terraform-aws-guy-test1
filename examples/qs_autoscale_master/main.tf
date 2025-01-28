@@ -15,6 +15,7 @@ module "launch_qs_autoscale" {
   prefix = var.prefix
   asg_name = var.asg_name
   vpc_id = module.launch_vpc.vpc_id
+  security_rules = var.security_rules
   key_name = var.key_name
   enable_volume_encryption = var.enable_volume_encryption
   enable_instance_connect = var.enable_instance_connect

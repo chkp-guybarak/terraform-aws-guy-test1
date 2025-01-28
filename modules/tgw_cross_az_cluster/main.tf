@@ -1,7 +1,7 @@
 module "cluster_into_vpc" {
   source = "../cross_az_cluster"
 
-
+  security_rules = var.security_rules
   vpc_id = var.vpc_id
   public_subnet_ids = tolist([var.public_subnet_1, var.public_subnet_2])
   private_subnet_ids = tolist([var.private_subnet_1, var.private_subnet_2])

@@ -8,7 +8,7 @@ module "amis" {
 }
 
 module "common_permissive_sg" {
-  source = "../common/permissive_sg"
+  source = "../permissive_sg"
   security_rules = var.security_rules
   vpc_id = var.vpc_id
   resources_tag_name = var.resources_tag_name

@@ -34,6 +34,27 @@ resource "aws_security_group" "tap_sg" {
     to_port = 4789
     cidr_blocks = ["0.0.0.0/0"]
   }
+    
+  dynamic "ingress" {
+    for_each = [for rule in var.security_rules : rule if rule.direction == "ingress"]
+    content {
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }  
+
+  dynamic "egress" {
+    for_each = [for rule in var.security_rules : rule if rule.direction == "egress"]
+    content {
+      from_port   = egress.value.from_port
+      to_port     = egress.value.to_port
+      protocol    = egress.value.protocol
+      cidr_blocks = egress.value.cidr_blocks
+    }
+  }  
+
   name = format("%s_SecurityGroup", var.resources_tag_name != "" ? var.resources_tag_name : var.instance_name) // Group name
   tags = {
     Name = format("%s_SecurityGroup", var.resources_tag_name != "" ? var.resources_tag_name : var.instance_name) // Resource name

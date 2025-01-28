@@ -15,10 +15,30 @@ resource "aws_security_group" "external_alb_security_group" {
     to_port = local.provided_port_condition ? var.service_port : local.encrypted_protocol_condition ? 443 : 80
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
+  dynamic "ingress" {
+    for_each = [for rule in var.security_rules : rule if rule.direction == "ingress"]
+    content {
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }
+
+  dynamic "egress" {
+    for_each = [for rule in var.security_rules : rule if rule.direction == "egress"]
+    content {
+      from_port   = egress.value.from_port
+      to_port     = egress.value.to_port
+      protocol    = egress.value.protocol
+      cidr_blocks = egress.value.cidr_blocks
+    }
+  }
 }
 
 module "external_load_balancer" {
-  source = "../../modules/common/load_balancer"
+  source = "../../modules/load_balancer"
 
   load_balancers_type = var.load_balancers_type
   instances_subnets = var.gateways_subnets
@@ -117,7 +137,7 @@ resource "aws_security_group" "internal_security_group" {
 
 module "internal_load_balancer" {
   count = local.deploy_servers_condition ? 1 : 0
-  source = "../../modules/common/load_balancer"
+  source = "../../modules/load_balancer"
 
   load_balancers_type = var.load_balancers_type
   instances_subnets = var.servers_subnets

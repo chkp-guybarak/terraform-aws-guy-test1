@@ -52,7 +52,7 @@ variable "gateway_instance_type" {
   default = "c6in.xlarge"
 }
 module "validate_instance_type" {
-  source = "../common/instance_type"
+  source = "../instance_type"
 
   chkp_type = "gateway"
   instance_type = var.gateway_instance_type
@@ -110,7 +110,7 @@ variable "gateway_version" {
   default = "R81.20-BYOL"
 }
 module "validate_gateway_version" {
-  source = "../common/version_license"
+  source = "../version_license"
 
   chkp_type = "gateway"
   version_license = var.gateway_version

@@ -46,7 +46,7 @@ variable "gateway_instance_type" {
   default = "c6in.xlarge"
 }
 module "validate_instance_type" {
-  source = "..common/instance_type"
+  source = "../instance_type"
 
   chkp_type = "gateway"
   instance_type = var.gateway_instance_type
@@ -112,7 +112,7 @@ variable "gateway_version" {
   default = "R81.20-BYOL"
 }
 module "validate_gateway_version" {
-  source = "../common/version_license"
+  source = "../version_license"
 
   chkp_type = "gateway"
   version_license = var.gateway_version
@@ -181,4 +181,16 @@ variable "secondary_ntp" {
   type = string
   description = "(Optional) The IPv4 addresses of Network Time Protocol secondary server"
   default = "0.pool.ntp.org"
+}
+
+variable "security_rules" {
+  description = "List of security rules for ingress and egress"
+  type        = list(object({
+    direction   = string  # "ingress" or "egress"
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  default = []
 }

@@ -38,7 +38,7 @@ variable "servers_instance_type" {
   default = "t3.micro"
 }
 module "validate_servers_instance_type" {
-  source = "../common/instance_type"
+  source = "../instance_type"
 
   chkp_type = "server"
   instance_type = var.servers_instance_type

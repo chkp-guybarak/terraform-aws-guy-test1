@@ -18,6 +18,61 @@ This solution uses the following modules:
 ## Usage
 Follow best practices for using CGNS modules on [the root page](https://registry.terraform.io/modules/checkpointsw/cloudguard-network-security/aws/latest#:~:text=Best%20Practices%20for%20Using%20Our%20Modules).
 
+**Example:**
+```
+provider "aws" {}
+
+module "example_module" {
+
+    source  = "CheckPointSW/cloudguard-network-security/aws//modules/gateway"
+    version = "1.0.0"
+
+    // --- VPC Network Configuration ---
+    vpc_id = "vpc-12345678"
+    public_subnet_id = "subnet-123456"
+    private_subnet_id = "subnet-345678"
+    private_route_table = "rtb-12345678"
+
+    // --- EC2 Instance Configuration ---
+    gateway_name = "Check-Point-Gateway-tf"
+    gateway_instance_type = "c5.xlarge"
+    key_name = "publickey"
+    allocate_and_associate_eip = true
+    volume_size = 100
+    volume_encryption = "alias/aws/ebs"
+    enable_instance_connect = false
+    disable_instance_termination = false
+    instance_tags = {
+      key1 = "value1"
+      key2 = "value2"
+    }
+
+    // --- Check Point Settings ---
+    gateway_version = "R81.20-BYOL"
+    admin_shell = "/etc/cli.sh"
+    gateway_SICKey = "12345678"
+    gateway_password_hash = ""
+    gateway_maintenance_mode_password_hash = "" # For R81.10 and below the gateway_password_hash is used also as maintenance-mode password.
+  
+    // --- Quick connect to Smart-1 Cloud (Recommended) ---
+    gateway_TokenKey = ""
+  
+    // --- Advanced Settings ---
+    resources_tag_name = "tag-name"
+    gateway_hostname = "gw-hostname"
+    allow_upload_download = true
+    enable_cloudwatch = false
+    gateway_bootstrap_script = "echo 'this is bootstrap script' > /home/admin/bootstrap.txt"
+    primary_ntp = ""
+    secondary_ntp = ""
+
+    // --- Automatic Provisioning with Security Management Server Settings (optional) ---
+    control_gateway_over_public_or_private_address =  "private"
+    management_server = ""
+    configuration_template = ""
+}
+  ```
+
 - Conditional creation
   - To create an Elastic IP and associate it to the Gateway instance:
   ```

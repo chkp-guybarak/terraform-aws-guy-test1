@@ -48,7 +48,7 @@ variable "instance_type" {
   default = "c5.xlarge"
 }
 module "validate_instance_type" {
-  source = "../common/instance_type"
+  source = "../instance_type"
 
   chkp_type = "gateway"
   instance_type = var.instance_type
@@ -65,7 +65,7 @@ variable "version_license" {
   default = "R80.40-PAYG-NGTX"
 }
 module "validate_version" {
-  source = "../common/version_license"
+  source = "../version_license"
 
   chkp_type = "gateway"
   version_license = var.version_license
