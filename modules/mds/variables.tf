@@ -156,8 +156,6 @@ variable "mds_bootstrap_script" {
   description = "(Optional) Semicolon (;) separated commands to run on the initial boot"
   default = ""
 }
-
-
 variable "security_rules" {
   description = "List of security rules for ingress and egress"
   type        = list(object({

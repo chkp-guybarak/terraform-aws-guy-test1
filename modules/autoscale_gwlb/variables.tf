@@ -5,6 +5,10 @@ variable "prefix" {
   type = string
   description = "(Optional) Instances name prefix"
   default = ""
+    validation {
+    condition     = length(var.prefix) <= 40
+    error_message = "Prefix can not exceed 40 characters."
+  }
 }
 variable "asg_name" {
   type = string
@@ -176,8 +180,6 @@ variable "volume_type" {
   description = "General Purpose SSD Volume Type"
   default = "gp3"
 }
-
-
 variable "security_rules" {
   description = "List of security rules for ingress and egress"
   type        = list(object({
@@ -189,4 +191,3 @@ variable "security_rules" {
   }))
   default = []
 }
-

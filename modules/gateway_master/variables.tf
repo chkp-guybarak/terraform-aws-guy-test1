@@ -176,7 +176,6 @@ variable "configuration_template" {
     error_message = "The configuration_template name can not exceed 30 characters."
   }
 }
-
 variable "security_rules" {
   description = "List of security rules for ingress and egress"
   type        = list(object({

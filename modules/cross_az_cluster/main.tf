@@ -1,5 +1,3 @@
-
-
 module "amis" {
   source = "../amis"
 

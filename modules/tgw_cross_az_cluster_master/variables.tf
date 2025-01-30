@@ -181,7 +181,6 @@ variable "secondary_ntp" {
   description = "(Optional) The IPv4 addresses of Network Time Protocol secondary server"
   default = "0.pool.ntp.org"
 }
-
 variable "security_rules" {
   description = "List of security rules for ingress and egress"
   type        = list(object({

@@ -12,7 +12,6 @@ module "launch_vpc" {
 module "launch_tgw_asg_into_vpc" {
   source = "../tgw_asg"
 
-
   vpc_id = module.launch_vpc.vpc_id
   gateways_subnets = module.launch_vpc.public_subnets_ids_list
   key_name = var.key_name

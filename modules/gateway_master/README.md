@@ -34,11 +34,9 @@ provider "aws" {}
 module "example_module" {
 
   source  = "CheckPointSW/cloudguard-network-security/aws//modules/gateway_master"
-  version = "1.0.0"
+  version = "1.0.2"
 
-  //PLEASE refer to README.md for accepted values FOR THE VARIABLES BELOW
-
-  // --- VPC Network Configuration ---
+    // --- VPC Network Configuration ---
   vpc_cidr = "10.0.0.0/16"
   public_subnets_map = {
     "us-east-1a" = 1
@@ -121,8 +119,6 @@ module "example_module" {
 | configuration_template                         | (Optional) A name of a Security Gateway configuration template in the automatic provisioning configuration                                                                                                                                                                 | string      | **Default:** ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | gateway_maintenance_mode_password_hash         | (Optional) Check Point recommends setting Admin user's password and maintenance-mode password for recovery purposes. For R81.10 and below the Admin user's password is used also as maintenance-mode password. (To generate a password hash use the command 'grub2-mkpasswd-pbkdf2' on Linux and paste it here).                                           | string      | **Default:** ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
  security_rules | List of security rules for ingress and egress.                                                         | list(object({<br/>    direction   = string    <br/>from_port   = any    <br/>to_port     = any <br/>protocol    = any <br/>cidr_blocks = list(any)<br/>}))         | **Default:** []|
-
-
 
 
 ## Outputs

@@ -5,11 +5,19 @@ variable "prefix" {
   type = string
   description = "(Optional) Instances name prefix"
   default = ""
+    validation {
+    condition     = length(var.prefix) <= 40
+    error_message = "Prefix can not exceed 40 characters."
+  }
 }
 variable "asg_name" {
   type = string
   description = "Autoscaling Group name"
   default = "Check-Point-ASG-tf"
+  validation {
+    condition     = length(var.asg_name) <= 100
+    error_message = "Autoscaling Group name can not exceed 100 characters."
+  }
 }
 
 // --- VPC Network Configuration ---
@@ -171,7 +179,6 @@ variable "proxy_elb_clients" {
   description = "The CIDR range of the clients of the proxy"
   default = "0.0.0.0/0"
 }
-
 variable "security_rules" {
   description = "List of security rules for ingress and egress"
   type        = list(object({
@@ -183,4 +190,3 @@ variable "security_rules" {
   }))
   default = []
 }
-

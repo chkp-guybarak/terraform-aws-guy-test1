@@ -34,7 +34,7 @@ provider "aws" {}
 module "example_module" {
 
     source  = "CheckPointSW/cloudguard-network-security/aws//modules/tgw_asg_master"
-    version = "1.0.0"
+    version = "1.0.2"
   
     // --- Network Configuration ---
     vpc_cidr = "10.0.0.0/16"
@@ -81,22 +81,22 @@ module "example_module" {
     management_server = "management-server"
     configuration_template = "template-name"
 }
-    ```
+```
 
   - Conditional creation
     - To create a Security Management server with IAM Role:
-  ```
+```
   management_permissions = "Create with read permissions" | "Create with read-write permissions" | "Create with assume role permissions (specify an STS role ARN)"
-  ```
+```
   - To enable cloudwatch for ASG:
-  ```
+```
   enable_cloudwatch = true
-  ```
+```
   Note: enabling cloudwatch will automatically create IAM role with cloudwatch:PutMetricData permission
   - To deploy Security Management Server:
-  ```
+```
   management_deploy = true
-  ```
+```
 
 
 ## Inputs
@@ -113,7 +113,7 @@ module "example_module" {
 | metadata_imdsv2_required                  | Deploy instance with metadata v2 token required                                                                                  | bool         | true/false<br>**Default:** true                                                                      |
 | allow_upload_download                     | Automatically download Blade Contracts and other important data                                                                  | bool         | true/false<br>**Default:** true                                                                      |
 | gateway_name                              | (Optional) Name tag of the Security Gateway instances                                                                            | string       | **Default:** Check-Point-Gateway                                                             |
-| gateway_instance_type                     | Instance type of the Security Gateways                                                                                          | string       | - c5.large<br>- m6i.large<br>**Default:** c5.xlarge                                                  |
+| gateway_instance_type                     | Instance type of the Security Gateways                                                                                          | string       | - c4.large <br/> - c4.xlarge <br/> - c5.large <br/> - c5.xlarge <br/> - c5.2xlarge <br/> - c5.4xlarge <br/> - c5.9xlarge <br/> - c5.12xlarge <br/> - c5.18xlarge <br/> - c5.24xlarge <br/> - c5n.large <br/> - c5n.xlarge <br/> - c5n.2xlarge <br/> - c5n.4xlarge <br/> - c5n.9xlarge <br/>  - c5n.18xlarge <br/>  - c5d.large <br/> - c5d.xlarge <br/> - c5d.2xlarge <br/> - c5d.4xlarge <br/> - c5d.9xlarge <br/> - c5d.12xlarge <br/>  - c5d.18xlarge <br/>  - c5d.24xlarge <br/> - m5.large <br/> - m5.xlarge <br/> - m5.2xlarge <br/> - m5.4xlarge <br/> - m5.8xlarge <br/> - m5.12xlarge <br/> - m5.16xlarge <br/> - m5.24xlarge <br/> - m6i.large <br/> - m6i.xlarge <br/> - m6i.2xlarge <br/> - m6i.4xlarge <br/> - m6i.8xlarge <br/> - m6i.12xlarge <br/> - m6i.16xlarge <br/> - m6i.24xlarge <br/> - m6i.32xlarge <br/> - c6i.large <br/> - c6i.xlarge <br/> - c6i.2xlarge <br/> - c6i.4xlarge <br/> - c6i.8xlarge <br/> - c6i.12xlarge <br/> - c6i.16xlarge <br/> - c6i.24xlarge <br/> - c6i.32xlarge <br/> - c6in.large <br/> - c6in.xlarge <br/> - c6in.2xlarge <br/> - c6in.4xlarge <br/> - c6in.8xlarge <br/> - c6in.12xlarge <br/> - c6in.16xlarge <br/> - c6in.24xlarge <br/> - c6in.32xlarge <br/> - r5.large <br/> - r5.xlarge <br/> - r5.2xlarge <br/> - r5.4xlarge <br/> - r5.8xlarge <br/> - r5.12xlarge <br/> - r5.16xlarge <br/> - r5.24xlarge <br/> - r5a.large <br/> - r5a.xlarge <br/> - r5a.2xlarge <br/> - r5a.4xlarge <br/> - r5a.8xlarge <br/> - r5a.12xlarge <br/> - r5a.16xlarge <br/> - r5a.24xlarge <br/> - r5b.large <br/> - r5b.xlarge <br/> - r5b.2xlarge <br/> - r5b.4xlarge <br/> - r5b.8xlarge <br/> - r5b.12xlarge <br/> - r5b.16xlarge <br/> - r5b.24xlarge <br/> - r5n.large <br/> - r5n.xlarge <br/> - r5n.2xlarge <br/> - r5n.4xlarge <br/> - r5n.8xlarge <br/> - r5n.12xlarge <br/> - r5n.16xlarge <br/> - r5n.24xlarge <br/> - r6i.large <br/> - r6i.xlarge <br/> - r6i.2xlarge <br/> - r6i.4xlarge <br/> - r6i.8xlarge <br/> - r6i.12xlarge <br/> - r6i.16xlarge <br/> - r6i.24xlarge <br/> - r6i.32xlarge <br/> - m6a.large <br/> - m6a.xlarge <br/> - m6a.2xlarge  <br/> - m6a.4xlarge <br/> - m6a.8xlarge <br/> - m6a.12xlarge <br/> - m6a.16xlarge <br/> - m6a.24xlarge <br/> - m6a.32xlarge <br/> - m6a.48xlarge <br/>**Default:** c5.xlarge                                                  |
 | gateways_min_group_size                   | Minimum number of Security Gateways                                                                                              | number       | **Default:** 2                                                                               |
 | gateways_max_group_size                   | Maximum number of Security Gateways                                                                                              | number       | **Default:** 10                                                                              |
 | gateway_version                           | Gateway version and license                                                                                                      | string       | - R81.20-BYOL<br>- R82-PAYG<br>**Default:** R81.20-BYOL                                              |
@@ -122,7 +122,7 @@ module "example_module" {
 | enable_cloudwatch                         | Report Check Point-specific CloudWatch metrics                                                                                  | bool         | true/false<br>**Default:** false                                                                     |
 | asn                                       | Organization Autonomous System Number (ASN)                                                                                     | string       | **Default:** 6500                                                                             |
 | management_deploy                         | Deploy or use an existing Security Management Server                                                                             | bool         | true/false<br>**Default:** true                                                                      |
-| management_instance_type                  | Instance type of the Security Management Server                                                                                 | string       | - m5.large<br>- m6a.large<br>**Default:** m5.xlarge                                                  |
+| management_instance_type                  | Instance type of the Security Management Server                                                                                 | string       | - c4.large <br/> - c4.xlarge <br/> - c5.large <br/> - c5.xlarge <br/> - c5.2xlarge <br/> - c5.4xlarge <br/> - c5.9xlarge <br/> - c5.12xlarge <br/> - c5.18xlarge <br/> - c5.24xlarge <br/> - c5n.large <br/> - c5n.xlarge <br/> - c5n.2xlarge <br/> - c5n.4xlarge <br/> - c5n.9xlarge <br/>  - c5n.18xlarge <br/>  - c5d.large <br/> - c5d.xlarge <br/> - c5d.2xlarge <br/> - c5d.4xlarge <br/> - c5d.9xlarge <br/> - c5d.12xlarge <br/>  - c5d.18xlarge <br/>  - c5d.24xlarge <br/> - m5.large <br/> - m5.xlarge <br/> - m5.2xlarge <br/> - m5.4xlarge <br/> - m5.8xlarge <br/> - m5.12xlarge <br/> - m5.16xlarge <br/> - m5.24xlarge <br/> - m6i.large <br/> - m6i.xlarge <br/> - m6i.2xlarge <br/> - m6i.4xlarge <br/> - m6i.8xlarge <br/> - m6i.12xlarge <br/> - m6i.16xlarge <br/> - m6i.24xlarge <br/> - m6i.32xlarge <br/> - c6i.large <br/> - c6i.xlarge <br/> - c6i.2xlarge <br/> - c6i.4xlarge <br/> - c6i.8xlarge <br/> - c6i.12xlarge <br/> - c6i.16xlarge <br/> - c6i.24xlarge <br/> - c6i.32xlarge <br/> - c6in.large <br/> - c6in.xlarge <br/> - c6in.2xlarge <br/> - c6in.4xlarge <br/> - c6in.8xlarge <br/> - c6in.12xlarge <br/> - c6in.16xlarge <br/> - c6in.24xlarge <br/> - c6in.32xlarge <br/> - r5.large <br/> - r5.xlarge <br/> - r5.2xlarge <br/> - r5.4xlarge <br/> - r5.8xlarge <br/> - r5.12xlarge <br/> - r5.16xlarge <br/> - r5.24xlarge <br/> - r5a.large <br/> - r5a.xlarge <br/> - r5a.2xlarge <br/> - r5a.4xlarge <br/> - r5a.8xlarge <br/> - r5a.12xlarge <br/> - r5a.16xlarge <br/> - r5a.24xlarge <br/> - r5b.large <br/> - r5b.xlarge <br/> - r5b.2xlarge <br/> - r5b.4xlarge <br/> - r5b.8xlarge <br/> - r5b.12xlarge <br/> - r5b.16xlarge <br/> - r5b.24xlarge <br/> - r5n.large <br/> - r5n.xlarge <br/> - r5n.2xlarge <br/> - r5n.4xlarge <br/> - r5n.8xlarge <br/> - r5n.12xlarge <br/> - r5n.16xlarge <br/> - r5n.24xlarge <br/> - r6i.large <br/> - r6i.xlarge <br/> - r6i.2xlarge <br/> - r6i.4xlarge <br/> - r6i.8xlarge <br/> - r6i.12xlarge <br/> - r6i.16xlarge <br/> - r6i.24xlarge <br/> - r6i.32xlarge <br/> - m6a.large <br/> - m6a.xlarge <br/> - m6a.2xlarge  <br/> - m6a.4xlarge <br/> - m6a.8xlarge <br/> - m6a.12xlarge <br/> - m6a.16xlarge <br/> - m6a.24xlarge <br/> - m6a.32xlarge <br/> - m6a.48xlarge <br/>**Default:** m5.xlarge                                                  |
 | management_version                        | License for the Security Management Server                                                                                      | string       | - R81.10-BYOL<br>- R82-BYOL<br>**Default:** R81.20-BYOL                                              |
 | management_password_hash                  | (Optional) Admin user's password hash                                                                                           | string       |                                                                                                    |
 | management_permissions                    | IAM role for the instance profile                                                                                               | string       | - None<br>- Use existing<br>- Create with read-write permissions<br>**Default:** Create with read-write permissions |
@@ -132,7 +132,7 @@ module "example_module" {
 | gateway_management                        | Select 'Over the internet' for non-private IP-managed gateways                                                                  | string       | - Locally managed<br>- Over the internet<br>**Default:** Locally managed                             |
 | control_gateway_over_public_or_private_address | Use private or public address for gateways                                                                                      | string       | - private<br>- public<br>**Default:** private                                                        |
 | management_server                         | (Optional) Name representing the Security Management Server                                                                     | string       | **Default:** management-server                                                               |
-| configuration_template                    | (Optional) Security Gateway configuration template                                                                              | string       | **Default:** tgw_asg-configuration                                                           |
+| configuration_template                    | (Optional) Security Gateway configuration template                                                                              | string       | **Default:** TGW-ASG-configuration                                                           |
 | gateway_maintenance_mode_password_hash    | Maintenance-mode password hash                                                                                                  | string       |                                                                                                    |
 | management_maintenance_mode_password_hash | Maintenance-mode password hash for the Security Management Server                                                              | string       |                                                                                                    |
 
@@ -148,25 +148,3 @@ module "example_module" {
 | autoscaling_group_name   | The name of the deployed AutoScaling Group                                                                                                                                                                                                                  |
 | configuration_template   | The name that represents the configuration template. Configurations required to automatically provision the Gateways in the Auto Scaling Group, such as what Security Policy to install and which Blades to enable, will be placed under this template name |
 | controller_name          | The name that represents the controller. Configurations required to connect to your AWS environment, such as credentials and regions, will be placed under this controller name                                                                             | 
-
-## Revision History
-In order to check the template version, please refer to [sk116585](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk116585)
-
-| Template Version | Description                                                                                     |
-|------------------|-------------------------------------------------------------------------------------------------|
-| 20241027         | R82 version support                                                                             |
-| 20240704         | - R80.40 version deprecation.<br/>- R81 version deprecation.                                    |
-| 20240515         | Add support for requiring use instance metadata service version 2 (IMDSv2) only                 |
-| 20231012         | Update AWS Terraform provider version to 5.20.1                                                 |
-| 20230923         | Add support for C5d instance type                                                               |
-| 20230914         | Add support for maintenance mode password                                                       |
-| 20230829         | Change default Check Point version to R81.20                                                    |
-| 20230806         | Add support for c6in instance type                                                              | 
-| 20221226         | Support ASG Launch Template instead of Launch Configuration                                     |
-| 20221123         | R81.20 version support                                                                          |
-| 20220606         | New instance type support                                                                       |
-| 20210329         | First release of Check Point Transit Gateway Auto Scaling Group Master Terraform module for AWS |
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details

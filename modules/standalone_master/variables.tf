@@ -155,7 +155,6 @@ variable "gateway_addresses" {
   description = "(CIDR) Allow gateways only from this network to communicate with the Management Server"
   default = "0.0.0.0/0"
 }
-
 variable "security_rules" {
   description = "List of security rules for ingress and egress"
   type        = list(object({
