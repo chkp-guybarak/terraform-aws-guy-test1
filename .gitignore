@@ -40,4 +40,4 @@ terraform.rc
 *.log
 
 # Ignore files used for Terraform lock and dependency management
-.terraform.lock.hcl
+.terraform.lock.hcl/.vscode/

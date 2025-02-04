@@ -30,7 +30,7 @@ provider "aws" {}
 
 module "example_module" {
 
-    source  = "CheckPointSW/cloudguard-network-security/aws//modules/qs_autoscale"
+    source  = "CheckPointSW/cloudguard-network-security/aws//examples/qs_autoscale"
     version = "1.0.0"
 
     //PLEASE refer to README.md for accepted values FOR THE VARIABLES BELOW
@@ -143,29 +143,4 @@ module "example_module" {
 | server_ami                             | Amazon Machine Image ID of a preconfigured web server                                                                                                                                | string       |                                                                                                                                        |
 | gateway_maintenance_mode_password_hash | Check Point recommends setting Admin user's password and maintenance-mode password for recovery purposes                                                                             | string       |                                                                                                                                        |
  security_rules | List of security rules for ingress and egress.                                                         | list(object({<br/>    direction   = string    <br/>from_port   = any    <br/>to_port     = any <br/>protocol    = any <br/>cidr_blocks = list(any)<br/>}))         | **Default:** []|
-
-
-
-## Revision History
-In order to check the template version, please refer to [sk116585](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk116585)
-
-| Template Version | Description                                                                                                                         |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| 20241027         | R82 version support                                                                                                                 |
-| 20240515         | Add support for requiring use instance metadata service version 2 (IMDSv2) only                                                     |
-| 20240425         | Remove support for R81 and lower versions                                                                                           |
-| 20240310         | Add support for requiring use instance metadata service version 2 (IMDSv2) only                                                     |
-| 20240130         | Network Load Balancer Health Check configuration change for higher than R81 version. New Health Check Port is 8117 and Protocol TCP |
-| 20231127         | Add support for parameter admin shell                                                                                               |
-| 20231022         | Fixed template to populate x-chkp-tags correctly                                                                                    |
-| 20231012         | Update AWS Terraform provider version to 5.20.1                                                                                     |
-| 20230923         | Add support for C5d instance type                                                                                                   |
-| 20230914         | Add support for maintenance mode password                                                                                           |
-| 20230829         | Change default Check Point version to R81.20                                                                                        |
-| 20230806         | Add support for c6in instance type                                                                                                  | 
-| 20221226         | Support ASG Launch Template instead of Launch Configuration                                                                         |
-| 20221123         | R81.20 version support                                                                                                              |
-| 20220606         | New instance type support                                                                                                           |
-| 20210329         | Stability fixes                                                                                                                     |
-| 20210309         | First release of Check Point Quick Start Auto Scaling Terraform module for AWS                                                      |
 
