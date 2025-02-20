@@ -20,7 +20,6 @@ variable "subnets_bit_length" {
 variable "key_name" {
   type = string
   description = "The EC2 Key Pair name to allow SSH access to the instances"
-  default = true
 }
 variable "enable_volume_encryption" {
   type = bool
