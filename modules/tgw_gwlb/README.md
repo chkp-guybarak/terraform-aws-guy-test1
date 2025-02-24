@@ -33,6 +33,8 @@ module "example_module" {
 
     source  = "CheckPointSW/cloudguard-network-security/aws//modules/tgw_gwlb"
     version = "1.0.2"
+    
+    subscription_id                 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
     // --- VPC Network Configuration ---
     vpc_id = "vpc-12345678"
