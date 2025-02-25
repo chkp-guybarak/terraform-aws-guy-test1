@@ -18,6 +18,10 @@ This solution uses the following modules:
 ## Usage
 Follow best practices for using CGNS modules on [the root page](https://registry.terraform.io/modules/checkpointsw/cloudguard-network-security/aws/latest#:~:text=Best%20Practices%20for%20Using%20Our%20Modules).
 
+**Instead of the standard terraform apply command, use the following:**
+```
+  terraform apply -target=module.{module_name}.aws_route_table.private_subnet_rtb -auto-approve && terraform apply 
+  ```
 
 **Example:**
 ```
