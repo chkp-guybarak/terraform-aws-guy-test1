@@ -174,6 +174,12 @@ module "example_module" {
 | gateway_maintenance_mode_password_hash | Check Point recommends setting Admin user's password and maintenance-mode password for recovery purposes.                                                                        | string       |                                                                                                                                                                                                                                              |
 | management_maintenance_mode_password_hash | Check Point recommends setting Admin user's password and maintenance-mode password for recovery purposes.                                                                        | string       |                                                                                                                                                                                                                                              |
 ## Outputs
+To display the outputs defined by the module, create an `outputs.tf` file with the following structure:
+```
+output "instance_public_ip" {
+  value = module.{module_name}.instance_public_ip
+}
+```
 | Name                | Description                                                                           |
 |---------------------|---------------------------------------------------------------------------------------|
 | managment_public_ip | The deployed Security Management AWS instance public IP                               |

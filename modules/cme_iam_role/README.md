@@ -39,6 +39,12 @@ module "example_module" {
 
 
 ## Outputs
+To display the outputs defined by the module, create an `outputs.tf` file with the following structure:
+```
+output "instance_public_ip" {
+  value = module.{module_name}.instance_public_ip
+}
+```
 | Name                 | Description                           |
 |----------------------|---------------------------------------|
 | cme_iam_role_arn     | The created AWS IAM Role arn          |
